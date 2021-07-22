@@ -14,6 +14,9 @@ class Major(models.Model):
     freeElectives_credits = models.IntegerField()
     durationYr = models.IntegerField()
 
+    def __str__(self):
+        return self.programme_name
+
 class Person(models.Model):
     gender_choices = (
         ('M', 'Male'),

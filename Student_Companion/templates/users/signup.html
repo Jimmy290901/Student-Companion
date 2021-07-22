@@ -1,0 +1,57 @@
+{% extends 'users/base.html'%}
+
+{% block form_card %}
+    <h1>Sign Up</h1>
+    <form method='POST'> {% csrf_token %}
+        <center>
+            <table class="form_table">
+                <tr>
+                    <td>Username</td>
+                    <td>{{user_form.username}}</td>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>{{user_form.first_name}}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{user_form.last_name}}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>{{user_form.password1}}</td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td>{{user_form.password2}}</td>
+                </tr>
+
+                <tr>
+                    <td>Gender</td>
+                    <td>{{person_form.gender}}</td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td>{{person_form.phone_number}}</td>
+                </tr>
+                <tr>
+                    <td>College Email ID</td>
+                    <td>{{person_form.college_mail}}</td>
+                </tr>
+                <tr>
+                    <td>Major</td>
+                    <td>{{person_form.major}}</td>
+                </tr>
+                <tr>
+                    <td>Enrollment Year</td>
+                    <td>{{person_form.enr_year}}</td>
+                </tr>
+            </table>
+            <input type="submit" value="Create an account"> 
+        </center>
+    </form>
+    {% comment %} {{user_form.as_p}}
+    {{person_form.as_p}} {% endcomment %}
+    {{user_error}}
+    {{person_error}}
+{% endblock %}
