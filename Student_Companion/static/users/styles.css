@@ -18,3 +18,7 @@ body{
 .form_table{
     border-spacing: 1rem;
 }
+
+.navbar, .navbar-inverse{
+    width: 100%;
+}

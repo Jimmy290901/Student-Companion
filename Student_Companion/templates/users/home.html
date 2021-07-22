@@ -1,0 +1,7 @@
+{%extends "users/home_pg_base.html" %}
+
+{% block custom_navbar %}
+    {% for title, pg_link in navbar_links.items %}
+        <li><a href = {{pg_link}}>{{title}}</a></li>
+    {% endfor %}
+{% endblock %}

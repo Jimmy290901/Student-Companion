@@ -4,6 +4,26 @@ from .forms import *
 
 # Create your views here.
 
+user_navbar = {
+    'Home': '',
+    'To-Do': '',
+    'Your Courses': '',
+    'Rate Courses': '',
+    'Resume Maker': ''
+}
+
+admin_navbar = {
+    'Home':'',
+    'Add Courses':'',
+    'Enroll Students':'',
+}
+
+def home(request):
+    context = {
+        'navbar_links': admin_navbar
+    }
+    return render(request, 'users/home.html', context)
+
 def login(request):
     message = ''
     if request.method == 'POST':
