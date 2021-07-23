@@ -1,0 +1,39 @@
+{% extends 'users/home_pg_base.html' %}
+
+
+{% block content %}
+    <div class="flex-container">
+        <div class="form_card flex-column">
+            <h1>To-Do</h1>
+            <form method = "POST"> {% csrf_token %}
+                {{form.task_desc}} <br><br>
+                {{form.rem_d_and_t}} <br><br>
+                <input type="submit" value="ToDo">
+            </form>
+            <center>
+                <table>
+                    {% for task in tasksList %}
+                        <tr> 
+                            <td>{{task.task_desc}}</td>
+                            <td><a href={{task.update_url}}>Update</a></td>
+                            <td><a href={{task.delete_url}}>Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </center>
+        </div>
+    </div>
+    <!-- Date Time Picker JS -->
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'date-time-phone/jquery-ui.js' %}" ></script>
+    <script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script> 
+    <script>
+        $( function() {
+            $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            // $( "#id_rem_d_and_t" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
+        });
+  </script>
+  <!-- Date Time Picker JS -->
+{% endblock%}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.db.models.deletion import CASCADE
 from users.models import Person
 from django.utils import timezone
@@ -10,3 +11,8 @@ class Tasks(models.Model):
     completed = models.BooleanField(default = False)
     d_and_t = models.DateTimeField(default = timezone.now)
     rem_d_and_t = models.DateTimeField(blank =True, null = True)
+
+    def update_url(self):
+        return reverse('updateTask',kwargs={'task_id':self.id})
+    def delete_url(self):
+        return reverse('deleteTask', kwargs={'task_id':self.id})

@@ -1,4 +1,3 @@
-from django.contrib.auth import logout
 from users.views import *
 from django.urls import path
 

@@ -11,6 +11,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static "users/styles.css" %}">
+        <!-- Date Time Picker CSS -->
+        <link rel="stylesheet" href="{% static 'date-time-phone/jquery-ui.css' %}">
+        <link rel='stylesheet' href="{% static 'date-time-phone/jquery-ui-timepicker-addon.css' %}" />
+        <!-- Date Time Picker CSS -->
     </head>
     <body>
 
@@ -29,15 +33,25 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        {% block custom_navbar %}
-                            {% comment %} Buttons for navbar. Different for user and admin {% endcomment %}
-                        {% endblock %}
+                        {% if request.user.is_superuser %}
+                            <li><a href = "">Home</a></li>
+                            <li><a href = "">Add Courses</a></li>
+                            <li><a href = "">Enroll Students</a></li>  
+                        {% else %}
+                            <li><a href = "/">Home</a></li>
+                            <li><a href = "/todo">To-Do</a></li>
+                            <li><a href = "">Your Courses</a></li>
+                            <li><a href = "">Rate Courses</a></li>
+                            <li><a href = "">Resume Maker</a></li>
+                        {% endif %}
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        
+        {% block content %}
+        {% endblock %}
         <script src="" async defer></script>
     </body>
 </html>

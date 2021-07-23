@@ -2,33 +2,14 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .forms import *
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 
-user_navbar = {
-    'Home': '',
-    'To-Do': '',
-    'Your Courses': '',
-    'Rate Courses': '',
-    'Resume Maker': ''
-}
-
-admin_navbar = {
-    'Home':'',
-    'Add Courses':'',
-    'Enroll Students':'',
-}
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='/login')
 def home(request):
-    if request.user.is_superuser:
-        nav_links = admin_navbar
-    else:
-        nav_links = user_navbar
-    context = {
-        'navbar_links': nav_links
-    }
-    return render(request, 'users/home.html', context)
+    return render(request, 'users/home.html')
 
 def login(request):
     message = ''

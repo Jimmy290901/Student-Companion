@@ -1,9 +1,20 @@
 body{
     background-color: #ffd60a;
     font-family: 'Inter', sans-serif;
+}
+
+.flex-container{
     display:flex;
     justify-content: center;
     align-items: center;
+    height: 90vh;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 .form_card{
@@ -14,10 +25,11 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
 }
-
-.form_table{
+table{
+    border-collapse: initial;
     border-spacing: 1rem;
 }
+
 
 .navbar, .navbar-inverse{
     width: 100%;
