@@ -33,3 +33,6 @@ class Person(models.Model):
     ger_credits_completed = models.IntegerField(default = 0)
     major_credits_completed = models.IntegerField(default = 0)
     freeElectives_credits_completed = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return self.user.username
