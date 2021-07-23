@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .forms import *
 
@@ -18,9 +19,14 @@ admin_navbar = {
     'Enroll Students':'',
 }
 
+@login_required(login_url='/login')
 def home(request):
+    if request.user.is_superuser:
+        nav_links = admin_navbar
+    else:
+        nav_links = user_navbar
     context = {
-        'navbar_links': admin_navbar
+        'navbar_links': nav_links
     }
     return render(request, 'users/home.html', context)
 
@@ -29,11 +35,12 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username = username, password = password)
+        user = auth.authenticate(username = username, password = password)
         if user is not None:
-            message = 'Login Successfull'
+            auth.login(request, user)
+            return redirect('/')
         else:
-            message = 'Login Unsuccessfull'
+            message = 'Check Username or Password'
     context = {
         'message': message
     }
@@ -50,8 +57,9 @@ def signup(request):
             created_person = person.save(commit = False)
             created_person.user = created_user
             created_person.save()
-            print('User created successfully')
-            return redirect('login')
+            # print('User created successfully')
+            auth.login(request,created_user)
+            return redirect('/')
 
     context = {
         'user_form':user,
@@ -60,3 +68,7 @@ def signup(request):
         'person_error':person.errors,
     }
     return render(request,'users/signup.html', context)
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/login')

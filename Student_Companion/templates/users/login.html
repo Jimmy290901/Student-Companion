@@ -2,8 +2,8 @@
 
 {% block form_card %}
     <h1>Login</h1>
-    <form method="POST"> {% csrf_token %}
-        <center>
+    <center>
+        <form method="POST"> {% csrf_token %}
             <table class="form_table">
                 <tr>
                     <td>Username</td>
@@ -11,11 +11,12 @@
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="text" name="password"></td>
+                    <td><input type="password" name="password"></td>
                 </tr>
             </table>
             <input type = "submit" value="Log in"><br>
-            {{message}}
-        </center>
-    </form>
+        </form>
+        <p>Don't have an account? <a href='/signup'>Sign Up</a> now!</p>
+        <p>{{message}}</p>
+    </center>
 {% endblock %}
