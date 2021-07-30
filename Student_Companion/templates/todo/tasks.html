@@ -30,7 +30,7 @@
     <script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script> 
     <script>
         $( function() {
-            $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
         });
