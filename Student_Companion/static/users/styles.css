@@ -3,11 +3,16 @@ body{
     font-family: 'Inter', sans-serif;
 }
 
+.no-display{
+    display: none;
+}
+
 .flex-container{
     display:flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
+    width: 100vw;;
 }
 
 .flex-column {
@@ -25,6 +30,32 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
 }
+
+#modal_container{
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease;
+}
+
+.modal_show {
+    opacity:1 !important;
+    pointer-events: auto !important;
+}
+
+.box_modal{
+    background-color: white;
+    text-align: center;
+    height: 40rem;
+    width: 70rem;
+    padding:3em;
+}
+
 table{
     border-collapse: initial;
     border-spacing: 1rem;

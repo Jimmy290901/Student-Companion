@@ -2,6 +2,7 @@
 
 
 {% block content %}
+
     <div class="flex-container">
         <div class="form_card flex-column">
             <h1>To-Do</h1>
@@ -13,27 +14,65 @@
             <center>
                 <table>
                     {% for task in tasksList %}
-                        <tr> 
-                            <td>{{task.task_desc}}</td>
-                            <td><a href={{task.update_url}}>Update</a></td>
-                            <td><a href={{task.delete_url}}>Delete</a></td>
+                        <tr>
+                            <div id = "detail_no_show" class="no-display">
+                                {{task.id}}
+                                {{task.completed}}
+                                
+                            </div>                            
+                            {% if task.completed == True %}
+                                <td><strike>{{task.task_desc}}</strike></td>
+                                <td><input type="submit" value="UnDone" onclick="window.location='{{task.changeStatus_url}}'"></td>
+                            {% else %}
+                                <td>{{task.task_desc}}</td>
+                                <td><input type="submit" value="Done" onclick="window.location='{{task.changeStatus_url}}'"></td>
+                            {% endif %}
+                            {% comment %} <td>{{task.rem_d_and_t | date:"Y-m-d H:i" }}</td> {% endcomment %}
+                            <td><button class="update_task" onclick="fillUpdateDetails('{{task.task_desc}}', '{{task.update_url}}', '{{task.completed}}', '{{task.rem_d_and_t | date:"Y-m-d H:i"}}')">Update</button></td>
+                            {% comment %} <td><a href={{task.update_url}}>Update</a></td> {% endcomment %}
+                            <td><input type="submit" value="Delete" onclick="window.location='{{task.delete_url}}'"></td>
                         </tr>
                     {% endfor %}
                 </table>
             </center>
         </div>
     </div>
-    <!-- Date Time Picker JS -->
+
+    <!--Modal for task updations -->
+    <div id = "modal_container" class="flex-container">
+        <div class="box_modal">
+            <form method = "POST" action="#"> {% csrf_token %}
+                {{form.task_desc}} <br><br>
+                {{form.rem_d_and_t}} <br><br>
+                <label>Completed</label>
+                {{form.completed}} <br><br>
+                {% comment %} <input type="submit" id="update_button" value="Update"> <br><br> {% endcomment %}
+                <input type="submit" value="Update"> <br><br>
+            </form>
+            <button id="close_modal">Cancel</button>
+        </div>
+    </div>
+
     {% load static %}
+    <!-- Date Time Picker JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'date-time-phone/jquery-ui.js' %}" ></script>
     <script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script> 
-    <script>
+    {% comment %} <script>
         $( function() {
             $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
         });
-  </script>
+    </script> {% endcomment %}
+    <script>
+        $( function() {
+            $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            $( "#update_rem_id" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            // $( "#id_rem_d_and_t" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+            // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
+        });
+    </script>
+    <script src="{% static 'users/scripts.js' %}"></script>
   <!-- Date Time Picker JS -->
 {% endblock%}

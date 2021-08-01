@@ -16,3 +16,5 @@ class Tasks(models.Model):
         return reverse('updateTask',kwargs={'task_id':self.id})
     def delete_url(self):
         return reverse('deleteTask', kwargs={'task_id':self.id})
+    def changeStatus_url(self):
+        return reverse('changeStatus', kwargs={'task_id':self.id})
