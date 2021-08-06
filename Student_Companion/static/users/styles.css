@@ -22,6 +22,16 @@ body{
     padding: 1rem;
 }
 
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .form_card{
     background-color: white;
     height: 40rem;
@@ -29,6 +39,23 @@ body{
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
+}
+
+.info-card {
+    background-color: white;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin: 2rem;
+    padding: 0;
+}
+
+.rect_img {
+    height: auto;
+    max-width: 100%;
 }
 
 #modal_container{
