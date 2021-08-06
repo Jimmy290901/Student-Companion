@@ -44,7 +44,7 @@ body{
 .info-card {
     background-color: white;
     height: auto;
-    width: auto;
+    max-width: 460px;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -73,6 +73,10 @@ body{
 .modal_show {
     opacity:1 !important;
     pointer-events: auto !important;
+}
+
+.block_hide {
+    display: none;
 }
 
 .box_modal{

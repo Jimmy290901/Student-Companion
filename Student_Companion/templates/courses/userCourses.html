@@ -2,69 +2,85 @@
 
 {% block content %}
 
-    <div class="flex-column flex-center">
-        <h1> Foundation Courses </h1>
-        <div class="flex-row flex-center">
-                {% for course in fdp %}
+    <div class="flex-row" style="justify-content: space-evenly;">
+        <button type="button" class="btn btn-secondary" id="fdp_button" onclick="show_block('fdp')">FDP</button>
+        <button type="button" class="btn btn-danger" id="ger_button" onclick="show_block('ger')">GER</button>
+        <button type="button" class="btn btn-danger" id="major_button" onclick="show_block('major')">Major</button>
+        <button type="button" class="btn btn-danger" id="elective_button" onclick="show_block('elective')">Free Electives</button>
+    </div>
+
+    <div id="fdp">
+        <div class="flex-column flex-center">
+            <h1> Foundation Courses </h1>
+            <div class="flex-row flex-center">
+                    {% for course in fdp %}
+                        <div class="info-card flex-column">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                            {% if course.completed == True %}
+                                <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
+                            {% endif %}
+                        </div>
+                    {% endfor %}                
+            </div>
+        </div>
+        <hr style="width: 50%; color:gray;">
+    </div>
+    
+    <div class="block_hide" id="ger">
+        <div class="flex-column flex-center">
+            <h1> GER Courses </h1>
+            <div class="flex-row flex-center">    
+                {% for course in ger %}
+                    <div class="info-card flex-column">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                            {% if course.completed == True %}
+                                <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
+                            {% endif %}
+                    </div>
+                {% endfor %}      
+            </div>
+        </div>
+        <hr style="width: 50%; color:gray;">
+    </div>
+
+    <div class="block_hide" id="major">
+        <div class="flex-column flex-center">
+            <h1> Major Courses </h1>
+            <div class="flex-row flex-center">    
+                {% for course in major %}
                     <div class="info-card flex-column">
                         <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
                         {% if course.completed == True %}
                             <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
                         {% endif %}
                     </div>
-                {% endfor %}                
+                {% endfor %} 
+            </div>
         </div>
+        <hr style="width: 50%; color:gray;">
     </div>
-    
-    <hr style="width: 50%; color:gray;">
-    
-    <div class="flex-column flex-center">
-        <h1> GER Courses </h1>
-        <div class="flex-row flex-center">    
-            {% for course in ger %}
-                <div class="info-card flex-column">
+
+    <div class="block_hide" id="elective">
+        <div class="flex-column flex-center">
+            <h1> Free Electives Courses </h1>
+            <div class="flex-row flex-center">    
+                {% for course in elective %}
+                    <div class="info-card flex-column">
                         <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
                         {% if course.completed == True %}
                             <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
                         {% endif %}
-                </div>
-            {% endfor %}      
+                    </div>
+                {% endfor %} 
+            </div>
         </div>
+        <hr style="width: 50%; color:gray;">
     </div>
 
-    <hr style="width: 50%; color:gray;">
-
-    <div class="flex-column flex-center">
-        <h1> Major Courses </h1>
-        <div class="flex-row flex-center">    
-            {% for course in major %}
-                <div class="info-card flex-column">
-                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                    {% if course.completed == True %}
-                        <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                    {% endif %}
-                </div>
-            {% endfor %} 
-        </div>
-    </div>
-
-    <hr style="width: 50%; color:gray;">
-
-    <div class="flex-column flex-center">
-        <h1> Free Electives Courses </h1>
-        <div class="flex-row flex-center">    
-            {% for course in elective %}
-                <div class="info-card flex-column">
-                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                    {% if course.completed == True %}
-                        <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                    {% endif %}
-                </div>
-            {% endfor %} 
-        </div>
-    </div>
+    {% load static %}
+    <script src="{% static 'courses/scripts.js' %}"></script>
 {% endblock %}
