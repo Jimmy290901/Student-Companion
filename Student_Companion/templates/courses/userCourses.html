@@ -2,11 +2,15 @@
 
 {% block content %}
 
-    <div class="flex-row" style="justify-content: space-evenly;">
-        <button type="button" class="btn btn-secondary" id="fdp_button" onclick="show_block('fdp')">FDP</button>
+    <div class="flex-row" style="justify-content: space-evenly; margin-bottom: 50px;">
+        <button type="button" class="btn btn-dark" id="fdp_button" onclick="show_block('fdp')">FDP</button>
         <button type="button" class="btn btn-danger" id="ger_button" onclick="show_block('ger')">GER</button>
         <button type="button" class="btn btn-danger" id="major_button" onclick="show_block('major')">Major</button>
         <button type="button" class="btn btn-danger" id="elective_button" onclick="show_block('elective')">Free Electives</button>
+    </div>
+
+    <div class="flex-column flex-center">
+        <input type="text" id="srchBar" onkeyup="srchCourse()" placeholder="Search Courses...">
     </div>
 
     <div id="fdp">
