@@ -1,19 +1,17 @@
+from crispy_forms.helper import *
 from  django import forms
 from django.forms.widgets import Widget
+from .models import Course
 
-class courseForm(forms.Form):
-    name=forms.CharField(label='Course Name')
-    course_ID = forms.CharField(max_length = 10, label='Course ID')
-    faculties = forms.CharField(label='Faculty Name')
-    credits = forms.DecimalField(max_value=4.0,label='Course Cresits')
-    description = forms.CharField(required=False, widget=forms.Textarea, label='Course Description')
-    objectives = forms.CharField(required=False,widget=forms.Textarea, label='Course Objectives')
-    pedagogy = forms.CharField(required=False,widget=forms.Textarea, label='Course Pedagogy')
-    expectation = forms.CharField(required=False,widget=forms.Textarea, label='Course Expectations')
-    textbook = forms.CharField(required=False,widget=forms.Textarea, label='Course TextBooks')
-    refbook = forms.CharField(required=False, widget=forms.Textarea, label='Course Reference Books')
-    pf_allowed = forms.BooleanField(required=False, label='Pass/Fail Course?')
-    project_details = forms.CharField(required=False,widget=forms.Textarea, label='Course Objectives')
-    avg_rating = forms.DecimalField(max_value=5.0, decimal_places=1, required=False)
-    prereq = forms.CharField()
-    antireq = forms.CharField()
+class courseForm(forms.ModelForm):
+    class Meta:
+        model=Course
+        fields='__all__'
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.helper=FormHelper
+        self.helper.form_method='post'
+        self.helper.form_class='form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'

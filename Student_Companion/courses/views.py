@@ -7,12 +7,13 @@ from .models import *
 
 # Create your views here.
 def addCourse(request):
-    form = courseForm()
-    context = {
-        'form':form
-    }
-    return render(request,'courses/courseForm.html', context)
-
+    if request.method == 'POST':
+        form = courseForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form=courseForm()
+    return render(request,'courses/courseForm.html', {'form':form})
+ 
 @login_required(login_url='/login')
 def listCourses(request):
     person = get_object_or_404(Person, user = request.user)
