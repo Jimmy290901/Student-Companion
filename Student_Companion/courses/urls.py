@@ -7,6 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('addCourse', addCourse),
+    path('addFaculty',addFaculty),
     path('myCourses', listCourses),
 ]
 

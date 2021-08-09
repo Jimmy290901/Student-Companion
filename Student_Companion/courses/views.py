@@ -1,6 +1,6 @@
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import get_object_or_404, render
-from .forms import courseForm
+from .forms import courseForm, facultyForm
 from django.contrib.auth.decorators import login_required
 from users.models import Person
 from .models import *
@@ -13,6 +13,15 @@ def addCourse(request):
             form.save()
     form=courseForm()
     return render(request,'courses/courseForm.html', {'form':form})
+
+
+def addFaculty(request):
+    if request.method == 'POST':
+        form = facultyForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form=facultyForm()
+    return render(request,'courses/facultyForm.html', {'form':form})
  
 @login_required(login_url='/login')
 def listCourses(request):
