@@ -20,7 +20,7 @@ class Faculty(models.Model):
 class Course(models.Model):
     course_ID = models.CharField(max_length = 10, primary_key=True)
     faculties = models.ManyToManyField(Faculty)
-    course_photo = models.ImageField(upload_to='Course', default='Samples/Sample_Image.jpg')
+    course_photo = models.ImageField(upload_to='Course', default='Samples/Sample_Image.jpg', blank=True)
     course_title = models.CharField(max_length=100)
     credits = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank = True, null = True)
@@ -28,12 +28,12 @@ class Course(models.Model):
     pedagogy = models.TextField(blank = True, null = True)
     expectation = models.TextField(blank = True, null = True)
     textbook = models.TextField(blank = True, null = True)
-    refbook = models.TextField(blank = True, null = True)
-    pf_allowed = models.BooleanField(default = False)
+    reference_book = models.TextField(blank = True, null = True)
+    passFail_course = models.BooleanField(default = False)
     project_details = models.TextField(blank = True, null = True)
     avg_rating = models.DecimalField(max_digits = 2, decimal_places=1, null=True, blank = True)
-    prereq = models.ManyToManyField("self", blank=True)
-    antireq = models.ManyToManyField("self", blank=True)
+    prerequisite_courses = models.ManyToManyField("self", blank=True)
+    antirequisite_courses = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
         return self.course_ID

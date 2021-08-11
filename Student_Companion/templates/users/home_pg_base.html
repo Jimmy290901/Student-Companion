@@ -34,8 +34,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         {% if request.user.is_superuser %}
-                            <li><a href = "">Home</a></li>
-                            <li><a href = "">Add Courses</a></li>
+                            <li><a href = "/">Home</a></li>
+                            <li><a href = "/course/addCourse">Add Courses</a></li>
+                            <li><a href = "/course/addFaculty">Add Faculty</a></li>
                             <li><a href = "">Enroll Students</a></li>  
                         {% else %}
                             <li><a href = "/">Home</a></li>

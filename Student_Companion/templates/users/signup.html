@@ -52,6 +52,8 @@
     </form>
     {% comment %} {{user_form.as_p}}
     {{person_form.as_p}} {% endcomment %}
-    {{user_error}}
-    {{person_error}}
+    <div class="alert alert-danger">
+        {{user_error}}
+        {{person_error}}
+    </div>
 {% endblock %}

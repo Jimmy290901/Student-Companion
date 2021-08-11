@@ -6,7 +6,7 @@
     <div class="flex-container">
         <div class="form_card flex-column">
             <h1>To-Do</h1>
-            <form method = "POST"> {% csrf_token %}
+            <form class = "todo_form" method = "POST"> {% csrf_token %}
                 {{form.task_desc}} <br><br>
                 {{form.rem_d_and_t}} <br><br>
                 <input type="submit" value="ToDo">
