@@ -4,6 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.utils import timezone
 from users.models import Person
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.urls import reverse
 
 # Create your models here.
 
@@ -59,4 +60,7 @@ class CourseEnrollment(models.Model):
 
     def __str__(self):
         return (self.person.user.username + " -> " + self.course.course_ID)
+    
+    def categoryAllotURL(self):
+        return reverse('allotCategory', kwargs={'course_ID':self.course.course_ID, 'person_ID': self.person.user.username})
     

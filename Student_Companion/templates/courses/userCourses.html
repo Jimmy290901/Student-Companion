@@ -3,10 +3,12 @@
 {% block content %}
 
     <div class="flex-row" style="justify-content: space-evenly; margin-bottom: 50px;">
-        <button type="button" class="btn btn-dark" id="fdp_button" onclick="show_block('fdp')">FDP</button>
-        <button type="button" class="btn btn-danger" id="ger_button" onclick="show_block('ger')">GER</button>
-        <button type="button" class="btn btn-danger" id="major_button" onclick="show_block('major')">Major</button>
-        <button type="button" class="btn btn-danger" id="elective_button" onclick="show_block('elective')">Free Electives</button>
+        <button type="button" class="btn btn-dark" id="fdp_button" onclick="show_block('fdp')">FDP<br> {{fdp_credits_user}} / {{fdp_credits_limit}}</button>
+        <button type="button" class="btn btn-danger" id="ger_button" onclick="show_block('ger')">GER<br> {{ger_credits_user}} / {{ger_credits_limit}}</button>
+        <button type="button" class="btn btn-danger" id="major_button" onclick="show_block('major')">Major<br> {{major_credits_user}} / {{major_credits_limit}}</button>
+        <button type="button" class="btn btn-danger" id="elective_button" onclick="show_block('elective')">Free Electives<br> {{elective_credits_user}} / {{elective_credits_limit}}</button>
+        <button type="button" class="btn btn-danger" id="complete_button" onclick="show_block('complete')">Completed Courses</button>
+        <button type="button" class="btn btn-danger" id="incomplete_button" onclick="show_block('incomplete')">Incomplete Courses</button>
     </div>
 
     <div class="flex-column flex-center">
@@ -21,9 +23,10 @@
                         <div class="info-card flex-column">
                             <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
                             <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                            {% if course.completed == True %}
-                                <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                            {% endif %}
+                            <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                {{courseAllotment.category_allotted}}
+                                <input type="submit" value="Allot">
+                            </form>
                         </div>
                     {% endfor %}                
             </div>
@@ -37,11 +40,12 @@
             <div class="flex-row flex-center">    
                 {% for course in ger %}
                     <div class="info-card flex-column">
-                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                            {% if course.completed == True %}
-                                <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                            {% endif %}
+                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                            {{courseAllotment.category_allotted}}
+                            <input type="submit" value="Allot">
+                        </form>
                     </div>
                 {% endfor %}      
             </div>
@@ -56,10 +60,11 @@
                 {% for course in major %}
                     <div class="info-card flex-column">
                         <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                        {% if course.completed == True %}
-                            <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                        {% endif %}
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                            {{courseAllotment.category_allotted}}
+                            <input type="submit" value="Allot">
+                        </form>
                     </div>
                 {% endfor %} 
             </div>
@@ -74,10 +79,45 @@
                 {% for course in elective %}
                     <div class="info-card flex-column">
                         <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                        {% if course.completed == True %}
-                            <img src="pictures/Samples/check.png" alt="Done icon" style="height:20px; width:20px; margin-bottom:10px;">
-                        {% endif %}
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                            {{courseAllotment.category_allotted}}
+                            <input type="submit" value="Allot">
+                        </form>
+                    </div>
+                {% endfor %} 
+            </div>
+        </div>
+        <hr style="width: 50%; color:gray;">
+    </div>
+
+    <div class="block_hide" id="complete">
+        <div class="flex-column flex-center">
+            <h1> Completed Courses </h1>
+            <div class="flex-row flex-center">    
+                {% for course in complete %}
+                    <div class="info-card flex-column">
+                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                            {{courseAllotment.category_allotted}}
+                            <input type="submit" value="Allot">
+                        </form>
+                    </div>
+                {% endfor %} 
+            </div>
+        </div>
+        <hr style="width: 50%; color:gray;">
+    </div>
+
+    <div class="block_hide" id="incomplete">
+        <div class="flex-column flex-center">
+            <h1> Incomplete Courses</h1>
+            <div class="flex-row flex-center">    
+                {% for course in incomplete %}
+                    <div class="info-card flex-column">
+                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
                     </div>
                 {% endfor %} 
             </div>

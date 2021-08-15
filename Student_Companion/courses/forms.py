@@ -1,9 +1,11 @@
 from crispy_forms.helper import *
 from crispy_forms.layout import ButtonHolder, Submit
 from  django import forms
+from django.db.models.fields import CharField
 from django.forms import fields
+from django.forms import widgets
 from django.forms.widgets import Widget
-from .models import Course, Faculty
+from .models import Course, CourseEnrollment, Faculty
 
 class courseForm(forms.ModelForm):
     class Meta:
@@ -42,3 +44,11 @@ class facultyForm(forms.ModelForm):
         #         Submit('submit', 'Add Faculty')
         #     )
         # )
+
+class courseAllotForm(forms.ModelForm):
+    class Meta:
+        model = CourseEnrollment
+        fields = ('category_allotted',)
+        # widgets = {
+        #     'category_allotted': CharField(attrs={'value':})
+        # }

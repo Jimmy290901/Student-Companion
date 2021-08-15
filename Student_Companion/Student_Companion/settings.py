@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'todo',
     'users',
     'crispy_forms',
+    'django_crontab',
 ]
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
@@ -129,6 +131,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
 MEDIA_URL = '/pictures/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'pictures')
+
+#SMTP Config.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'shubham290901@gmail.com'
+EMAIL_HOST_PASSWORD = 'shubham2001'
+
+#Configuring CRONJOBS
+CRONJOBS = [
+    ('*/1 * * * *', 'todo.send_reminder_emails')
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
