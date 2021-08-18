@@ -29,10 +29,10 @@ class Person(models.Model):
     college_mail = models.EmailField()
     major = models.ForeignKey(Major, on_delete=CASCADE)
     enr_year = models.IntegerField(validators=[MaxValueValidator(timezone.now().year)])
-    fdp_credits_completed = models.DecimalField(max_digits=7, decimal_places=2)
-    ger_credits_completed = models.DecimalField(max_digits=7, decimal_places=2)
-    major_credits_completed = models.DecimalField(max_digits=7, decimal_places=2)
-    freeElectives_credits_completed = models.DecimalField(max_digits=7, decimal_places=2)
+    fdp_credits_completed = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
+    ger_credits_completed = models.DecimalField(max_digits=7, decimal_places=2, default = 0.0)
+    major_credits_completed = models.DecimalField(max_digits=7, decimal_places=2, default = 0.0)
+    freeElectives_credits_completed = models.DecimalField(max_digits=7, decimal_places=2, default = 0.0)
 
     def __str__(self):
         return self.user.username
