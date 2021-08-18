@@ -1,4 +1,5 @@
 from django.db.models.fields import NullBooleanField
+from django.http import response
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from django.contrib.auth.decorators import login_required
@@ -74,8 +75,7 @@ def listCourses(request):
     return render(request, 'courses/userCourses.html', context)
 
 @login_required(login_url='/login')
-def allotCategory(request, course_ID, person_ID):
-    print("here")
+def allotCategory(request, course_ID, person_ID):    
     course = get_object_or_404(Course, course_ID = course_ID)
     person = get_object_or_404(Person, user = request.user)
     if request.user.username != person_ID:
@@ -108,3 +108,10 @@ def allotCategory(request, course_ID, person_ID):
         
         person.save()
         return redirect('listCourses')
+    
+def displayCourse(request, course_ID):
+    course = get_object_or_404(Course, course_ID = course_ID)
+    context = {
+        'course': course,
+    }
+    return render(request, 'courses/courseDisplay.html', context)

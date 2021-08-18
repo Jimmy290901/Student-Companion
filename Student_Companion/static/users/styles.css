@@ -32,6 +32,10 @@ body{
     flex-wrap: wrap;
 }
 
+.wrap {
+    flex-wrap: wrap;    
+}
+
 .form_card{
     background-color: white;
     height: auto;
@@ -118,4 +122,49 @@ table{
 .invalid-feedback {
     color: red;
     font-size: 12px;
+}
+
+.courseDispImg {
+    height: 30vh;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.padding-space {
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.margin-space {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.whitespace {
+    background-color: white !important;     
+}
+
+.no-space-flex {
+    justify-content: flex-start;
+}
+
+.grey-bckg{
+    background-color: #F6F6F6;
+}
+
+.padding20px{
+    padding: 20px;
+}
+
+.unset-margin-top {
+    margin-top:unset;
+}
+
+.content-box {
+    padding: 10px 20px ;
+}
+
+.content-box:hover {
+    background-color: #EDEDFF;
+    border-radius: 10px;
 }

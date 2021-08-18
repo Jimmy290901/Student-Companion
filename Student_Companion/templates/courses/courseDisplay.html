@@ -1,0 +1,99 @@
+{% extends 'users/home_pg_base.html' %}
+
+{% block content %}
+    <div class="whitespace">       
+
+        <div class="flex-row grey-bckg padding-space">
+            <img src="pictures/{{course.course_photo}}" class="courseDispImg">
+            <div class="flex-column wrap no-space-flex">
+                <h3>{{course.course_ID}} {{course.course_title}}</h3>
+                <h4>Credits: {{course.credits}}</h4>
+                <h4>Avg. Ratings: todo</h4>
+            </div>
+        </div>
+
+        <div class="margin-space">
+            <div class="flex-row no-space-flex">
+                <div class="padding20px">
+                    <h4>Overview</h4>
+                </div>
+
+                <div class="padding20px">
+                    <h4>Instructors</h4>
+                </div>
+
+                <div class="padding20px">
+                    <h4>Ratings</h4>
+                </div>
+            </div>
+
+            <hr size="5" noshade class="unset-margin-top">
+
+            <div class="flex-column wrap no-space-flex">
+                <div class="content-box">
+                    <h4>Course Description</h4>
+                    <p>{{course.description | linebreaks}}</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Objectives</h4>
+                    <p>{{course.objectives | linebreaks}}</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Pedagogy</h4>
+                    <p>{{course.pedagogy | linebreaks }}</p>
+                </div>
+
+                <div class="content-box">
+                    <h4>Expectation from students</h4>
+                    <p>{{course.expectation | linebreaks }}</p>
+                </div>
+
+                {% if course.textbook and course.refbook %}
+                    <div class="content-box">
+                        <h4>Books</h4>
+                        {% if course.textbook %}
+                            <h5>Textbooks</h5>
+                            <p>{{course.textbook | linebreaks }}</p>
+                        {% endif %}
+                        {% if course.refbook %}
+                            <h5>Reference Books</h5>
+                            <p>{{course.refbook | linebreaks }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if course.prerequisite_courses.all %}
+                    <div class="content-box">
+                        <h4>Prerequisites</h4>                        
+                        <ul>
+                            {% for prq in course.prerequisite_courses.all %}
+                                <li>{{prq.course_ID}} {{prq.course_title}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {% if course.antirequisite_courses.all %}
+                    <div class="content-box">
+                        <h4>Antirequisites</h4>                        
+                        <ul>
+                            {% for arq in course.antirequisite_courses.all %}
+                                <li>{{arq.course_ID}} {{arq.course_title}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <div class="content-box">
+                    <h4>Project/Assignment Details</h4>
+                    <p>{{course.project_details | linebreaks}}</p>
+                </div>
+
+            </div>
+
+        </div>
+        
+
+    </div>
+{% endblock %}
