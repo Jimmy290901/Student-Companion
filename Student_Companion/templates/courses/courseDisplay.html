@@ -14,22 +14,22 @@
 
         <div class="margin-space">
             <div class="flex-row no-space-flex">
-                <div class="padding20px">
+                <div class="tab padding20px tab-hghl" onclick="show('overview')" id="overview_tab">
                     <h4>Overview</h4>
                 </div>
 
-                <div class="padding20px">
+                <div class="tab padding20px"  onclick="show('instructors')" id="instructors_tab">
                     <h4>Instructors</h4>
                 </div>
 
-                <div class="padding20px">
+                <div class="tab padding20px"  onclick="show('ratings')" id="ratings_tab">
                     <h4>Ratings</h4>
                 </div>
             </div>
 
             <hr size="5" noshade class="unset-margin-top">
 
-            <div class="flex-column wrap no-space-flex">
+            <div class="flex-column wrap no-space-flex" id="overview_block">
                 <div class="content-box">
                     <h4>Course Description</h4>
                     <p>{{course.description | linebreaks}}</p>
@@ -92,8 +92,20 @@
 
             </div>
 
+            <div class="flex-row wrap no-display flex-center" id="instructors_block">
+                {% for faculty in course.faculties.all %}
+                    <div class="info-card flex-column">
+                        <img src="pictures/{{faculty.faculty_photo}}" alt="{{faculty.faculty_name}}'s Photo">
+                        <h4 class="padding20px">{{faculty.faculty_name}}</h4>                       
+                        <em class="padding20px">{{faculty.faculty_mail}}</em>
+                    </div>
+                {% endfor %}
+            </div>
+
         </div>
         
 
     </div>
+    {% load static %}
+    <script src="{% static 'courses/course_script.js' %}"></script>
 {% endblock %}

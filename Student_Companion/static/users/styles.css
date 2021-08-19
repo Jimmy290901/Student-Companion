@@ -4,7 +4,7 @@ body{
 }
 
 .no-display{
-    display: none;
+    display: none !important;
 }
 
 .flex-container{
@@ -128,6 +128,7 @@ table{
     height: 30vh;
     margin: 20px;
     border-radius: 10px;
+    overflow-x: hidden;
 }
 
 .padding-space {
@@ -168,3 +169,13 @@ table{
     background-color: #EDEDFF;
     border-radius: 10px;
 }
+
+.tab-hghl {
+    border-bottom: 1px solid blue;
+}
+
+.tab:hover {
+    background-color: #EDEDED;
+}
+
+/* @media(max-width:) */
