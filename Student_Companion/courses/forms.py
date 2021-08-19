@@ -10,7 +10,7 @@ from .models import Course, CourseEnrollment, Faculty
 class courseForm(forms.ModelForm):
     class Meta:
         model=Course
-        exclude = ('avg_rating'),
+        exclude = ('avg_teaching_rating','avg_syllabus_rating','avg_material_rating',),
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

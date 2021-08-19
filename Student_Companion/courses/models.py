@@ -32,9 +32,12 @@ class Course(models.Model):
     reference_book = models.TextField(blank = True, null = True)
     passFail_course = models.BooleanField(default = False)
     project_details = models.TextField(blank = True, null = True)
-    avg_rating = models.DecimalField(max_digits = 2, decimal_places=1, null=True, blank = True)
+    avg_teaching_rating = models.DecimalField(max_digits = 2, decimal_places=1, null=True, blank = True)
+    avg_syllabus_rating = models.DecimalField(max_digits = 2, decimal_places=1, null=True, blank = True)
+    avg_material_rating = models.DecimalField(max_digits = 2, decimal_places=1, null=True, blank = True)
     prerequisite_courses = models.ManyToManyField("self", blank=True)
     antirequisite_courses = models.ManyToManyField("self", blank=True)
+    total_reviews = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.course_ID
@@ -56,6 +59,7 @@ class CourseEnrollment(models.Model):
     teaching_rating = models.IntegerField(blank = True, null = True, validators = [MaxValueValidator(5), MinValueValidator(0)])
     syllabus_rating = models.IntegerField(blank = True, null = True, validators = [MaxValueValidator(5), MinValueValidator(0)])
     material_rating = models.IntegerField(blank = True, null = True, validators = [MaxValueValidator(5), MinValueValidator(0)])
+    feedback = models.TextField(null=True, blank=True)
     category_allotted = models.CharField(max_length = 1, null=True,blank=True,choices=category_choices)
 
     def __str__(self):

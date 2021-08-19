@@ -1,5 +1,3 @@
-
-
 var active_tab = "overview";
 
 function show(tab) {
