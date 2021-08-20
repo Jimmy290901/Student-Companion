@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from users.models import Person
 from .models import *
 
@@ -111,7 +112,19 @@ def allotCategory(request, course_ID, person_ID):
     
 def displayCourse(request, course_ID):
     course = get_object_or_404(Course, course_ID = course_ID)
+    students = CourseEnrollment.objects.filter(~Q(feedback=None), course = course).order_by('-review_d_and_t')
+    avgRating = round((course.avg_teaching_rating + course.avg_syllabus_rating + course.avg_material_rating)/3,1)
     context = {
         'course': course,
+        'avgRating': avgRating,
+        'avgRatingRange': range(int(avgRating)),
+        'remAvgRange': range(5- int(avgRating)),
+        'avgTeachingRange': range(int(course.avg_teaching_rating)),
+        'remTeachingRange': range(5- int(course.avg_teaching_rating)),
+        'avgSyllabusRange': range(int(course.avg_syllabus_rating)),
+        'remSyllabusRange': range(5- int(course.avg_syllabus_rating)),
+        'avgMaterialRange': range(int(course.avg_material_rating)),
+        'remMaterialRange': range(5- int(course.avg_material_rating)),
+        'students': students,
     }
     return render(request, 'courses/courseDisplay.html', context)

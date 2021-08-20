@@ -1,5 +1,9 @@
 {% extends 'users/home_pg_base.html' %}
 
+{% block linkFiles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block content %}
     <div class="whitespace">       
 
@@ -8,7 +12,18 @@
             <div class="flex-column wrap no-space-flex">
                 <h3>{{course.course_ID}} {{course.course_title}}</h3>
                 <h4>Credits: {{course.credits}}</h4>
-                <h4>Avg. Ratings: todo</h4>
+                <div class="flex-row wrap">                    
+                    <div class="center-item marginright">
+                        {% for i in avgRatingRange %}
+                            <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in remAvgRange %}
+                            <span class="fa fa-star"></span>
+                        {% endfor %}
+                    </div>
+                    <h4 class="marginright">{{avgRating}} / 5</h4>
+                    <h4>{{course.total_reviews}} reviews</h4>
+                </div>
             </div>
         </div>
 
@@ -30,28 +45,28 @@
             <hr size="5" noshade class="unset-margin-top">
 
             <div class="flex-column wrap no-space-flex" id="overview_block">
-                <div class="content-box">
+                <div class="content-box highlight-hover">
                     <h4>Course Description</h4>
                     <p>{{course.description | linebreaks}}</p>
                 </div>
 
-                <div class="content-box">
+                <div class="content-box highlight-hover">
                     <h4>Objectives</h4>
                     <p>{{course.objectives | linebreaks}}</p>
                 </div>
 
-                <div class="content-box">
+                <div class="content-box highlight-hover">
                     <h4>Pedagogy</h4>
                     <p>{{course.pedagogy | linebreaks }}</p>
                 </div>
 
-                <div class="content-box">
+                <div class="content-box highlight-hover">
                     <h4>Expectation from students</h4>
                     <p>{{course.expectation | linebreaks }}</p>
                 </div>
 
                 {% if course.textbook and course.refbook %}
-                    <div class="content-box">
+                    <div class="content-box highlight-hover">
                         <h4>Books</h4>
                         {% if course.textbook %}
                             <h5>Textbooks</h5>
@@ -64,7 +79,7 @@
                     </div>
                 {% endif %}
                 {% if course.prerequisite_courses.all %}
-                    <div class="content-box">
+                    <div class="content-box highlight-hover">
                         <h4>Prerequisites</h4>                        
                         <ul>
                             {% for prq in course.prerequisite_courses.all %}
@@ -75,7 +90,7 @@
                 {% endif %}
 
                 {% if course.antirequisite_courses.all %}
-                    <div class="content-box">
+                    <div class="content-box highlight-hover">
                         <h4>Antirequisites</h4>                        
                         <ul>
                             {% for arq in course.antirequisite_courses.all %}
@@ -85,7 +100,7 @@
                     </div>
                 {% endif %}
 
-                <div class="content-box">
+                <div class="content-box highlight-hover">
                     <h4>Project/Assignment Details</h4>
                     <p>{{course.project_details | linebreaks}}</p>
                 </div>
@@ -100,6 +115,72 @@
                         <em class="padding20px">{{faculty.faculty_mail}}</em>
                     </div>
                 {% endfor %}
+            </div>
+
+            <div class="no-display" id="ratings_block">
+
+                                
+
+                <div class="flex-column">
+                    <div class="flex-row wrap highlight-hover">
+                        <h4 class="marginright content-box">Teaching Average</h4>
+                        <div class="center-item marginright content-box">
+                            {% for i in avgTeachingRange %}
+                                <span class="fa fa-star checked"></span>
+                            {% endfor %}
+                            {% for i in remTeachingRange %}
+                                <span class="fa fa-star"></span>
+                            {% endfor %}
+                        </div>
+                        <h4 class="content-box">{{course.avg_teaching_rating}} / 5</h4>
+                    </div>
+
+                    <div class="flex-row wrap highlight-hover">
+                        <h4 class="marginright content-box">Syllabus Average&nbsp;</h4>
+                        <div class="center-item marginright content-box">
+                            {% for i in avgSyllabusRange %}
+                                <span class="fa fa-star checked"></span>
+                            {% endfor %}
+                            {% for i in remSyllabusRange %}
+                                <span class="fa fa-star"></span>
+                            {% endfor %}
+                        </div>
+                        <h4 class="content-box">{{course.avg_syllabus_rating}} / 5</h4>
+                    </div>
+
+                    <div class="flex-row wrap highlight-hover">
+                        <h4 class="marginright content-box">Material Average &nbsp;</h4>
+                        <div class="center-item marginright content-box">
+                            {% for i in avgMaterialRange %}
+                                <span class="fa fa-star checked"></span>
+                            {% endfor %}
+                            {% for i in remMaterialRange %}
+                                <span class="fa fa-star"></span>
+                            {% endfor %}
+                        </div>
+                        <h4 class="content-box">{{course.avg_material_rating}} / 5</h4>
+                    </div>
+                </div>
+                
+                <div class="flex-column">
+                    <div>
+                        <h4 class="padding1rem content-box">Feedback</h4>
+                        <hr size="5" noshade class="unset-margin-top">
+                    </div>
+                    <div class="flex-column">
+                        {% for student in students %}
+                            {% comment %} <div class="flex-column"> {% endcomment %}
+                                <div class="content-box">                                
+                                    <h5>{{student.person.user.first_name}} {{student.person.user.last_name}}</h5>
+                                    <h6>{{student.review_d_and_t}}</h6>                                    
+                                    <p>{{student.feedback}}</p>
+                                </div>
+                                
+                            {% comment %} </div> {% endcomment %}
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
 
         </div>

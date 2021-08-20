@@ -141,6 +141,10 @@ table{
     margin-right: 5vw;
 }
 
+.marginright {
+    margin-right: 30px;
+}
+
 .whitespace {
     background-color: white !important;     
 }
@@ -157,17 +161,16 @@ table{
     padding: 20px;
 }
 
+.padding1rem {
+    padding: 1rem;
+}
+
 .unset-margin-top {
     margin-top:unset;
 }
 
 .content-box {
     padding: 10px 20px ;
-}
-
-.content-box:hover {
-    background-color: #EDEDFF;
-    border-radius: 10px;
 }
 
 .tab-hghl {
@@ -179,4 +182,22 @@ table{
     cursor: pointer;
 }
 
-/* @media(max-width:) */
+.fa {
+    font-size: 25px;
+}
+
+.checked {
+    color: gold;
+}
+
+.center-item {
+    align-self: center;
+}
+
+.highlight-main {
+    background-color: #EDEDFF;
+}
+
+.highlight-hover:hover {
+    background-color: #FFFFA4;
+}
