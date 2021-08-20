@@ -52,15 +52,23 @@ class CourseEnrollment(models.Model):
         ("M", "Major Course"),
         ("E", "Free Electives")
     )
+    ratings_choices = (
+        (0,"0"),
+        (1,"1"),
+        (2,"2"),
+        (3,"3"),
+        (4,"4"),
+        (5,"5")
+    )
     course = models.ForeignKey(Course, on_delete=CASCADE)
     person = models.ForeignKey(Person, on_delete=CASCADE)
     completed = models.BooleanField(default=False)
     reg_d_and_t = models.DateTimeField(default = timezone.now)
-    teaching_rating = models.IntegerField(default=0, validators = [MaxValueValidator(5), MinValueValidator(0)])
-    syllabus_rating = models.IntegerField(default=0, validators = [MaxValueValidator(5), MinValueValidator(0)])
-    material_rating = models.IntegerField(default=0, validators = [MaxValueValidator(5), MinValueValidator(0)])
+    teaching_rating = models.IntegerField(null=True, blank=True, choices=ratings_choices)
+    syllabus_rating = models.IntegerField(null=True, blank=True, choices=ratings_choices)
+    material_rating = models.IntegerField(null=True, blank=True, choices=ratings_choices)
     feedback = models.TextField(null=True, blank=True)
-    review_d_and_t = models.DateTimeField(default = timezone.now)
+    review_d_and_t = models.DateTimeField(null=True, blank=True)
     category_allotted = models.CharField(max_length = 1, null=True,blank=True,choices=category_choices)
 
     def __str__(self):

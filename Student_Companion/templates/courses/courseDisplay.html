@@ -1,5 +1,5 @@
 {% extends 'users/home_pg_base.html' %}
-
+{% load crispy_forms_tags %}
 {% block linkFiles %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
@@ -158,26 +158,38 @@
                                 <span class="fa fa-star"></span>
                             {% endfor %}
                         </div>
-                        <h4 class="content-box">{{course.avg_material_rating}} / 5</h4>
+                        <h4 class="content-box">{{course.avg_material_rating}} / 5</h4>                    
                     </div>
+
+                    {% if show_rate_btn %}
+                        <div class="content-box">
+                            <button type="button" class="btn btn-primary baseline-item" onclick="show_modal()">Rate Course</button>
+                        </div>
+                    {% endif %}
+
                 </div>
-                
                 <div class="flex-column">
                     <div>
                         <h4 class="padding1rem content-box">Feedback</h4>
                         <hr size="5" noshade class="unset-margin-top">
                     </div>
                     <div class="flex-column">
-                        {% for student in students %}
-                            {% comment %} <div class="flex-column"> {% endcomment %}
-                                <div class="content-box">                                
-                                    <h5>{{student.person.user.first_name}} {{student.person.user.last_name}}</h5>
-                                    <h6>{{student.review_d_and_t}}</h6>                                    
-                                    <p>{{student.feedback}}</p>
-                                </div>
-                                
-                            {% comment %} </div> {% endcomment %}
-                        {% endfor %}
+                        {% if students %}
+                            {% for student in students %}
+                                {% comment %} <div class="flex-column"> {% endcomment %}
+                                    <div class="content-box">                                
+                                        <h5>{{student.person.user.first_name}} {{student.person.user.last_name}}</h5>
+                                        <h6>{{student.review_d_and_t}}</h6>                                    
+                                        <p>{{student.feedback}}</p>
+                                    </div>
+                                    
+                                {% comment %} </div> {% endcomment %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="content-box">
+                                <em>No Feedbacks yet.</em>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -187,6 +199,14 @@
         
 
     </div>
+
+    <div id="modal_container" class="flex-container">
+        <div class="box_modal">
+            {% crispy rating_form %}
+            <button type="button" class="btn btn-outline-secondary" onclick="hide_modal()">Cancel</button>
+        </div>
+    </div>
+
     {% load static %}
     <script src="{% static 'courses/course_script.js' %}"></script>
 {% endblock %}

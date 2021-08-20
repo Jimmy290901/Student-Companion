@@ -100,7 +100,7 @@ body{
 .box_modal{
     background-color: white;
     text-align: center;
-    height: 40rem;
+    height: auto;
     width: 70rem;
     padding:3em;
 }
@@ -192,6 +192,10 @@ table{
 
 .center-item {
     align-self: center;
+}
+
+.baseline-item {
+    align-self: baseline;
 }
 
 .highlight-main {

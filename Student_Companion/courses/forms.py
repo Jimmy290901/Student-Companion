@@ -52,3 +52,20 @@ class courseAllotForm(forms.ModelForm):
         # widgets = {
         #     'category_allotted': CharField(attrs={'value':})
         # }
+
+class ratingsForm(forms.ModelForm):
+    class Meta:
+        model = CourseEnrollment
+        fields = ('teaching_rating', 'syllabus_rating', 'material_rating', 'feedback')
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['teaching_rating'].required = True
+        self.fields['syllabus_rating'].required = True
+        self.fields['material_rating'].required = True
+        self.helper=FormHelper()
+        self.helper.form_method='post'
+        self.helper.form_class='form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(Submit('submit', 'Submit'))

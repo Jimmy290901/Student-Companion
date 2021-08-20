@@ -111,9 +111,28 @@ def allotCategory(request, course_ID, person_ID):
         return redirect('listCourses')
     
 def displayCourse(request, course_ID):
+    person = Person.objects.get(user=request.user)
     course = get_object_or_404(Course, course_ID = course_ID)
-    students = CourseEnrollment.objects.filter(~Q(feedback=None), course = course).order_by('-review_d_and_t')
+    if request.method == 'POST':
+        my_obj = CourseEnrollment.objects.get(course=course, person=person)
+        rating_form = ratingsForm(request.POST, instance=my_obj)
+        if rating_form.is_valid():
+            obj = rating_form.save(commit=False)            
+            obj.review_d_and_t = timezone.now()
+            course.total_reviews += 1
+            course.avg_teaching_rating += (obj.teaching_rating - course.avg_teaching_rating)/(course.total_reviews)
+            course.avg_syllabus_rating += (obj.syllabus_rating - course.avg_syllabus_rating)/(course.total_reviews)
+            course.avg_material_rating += (obj.material_rating - course.avg_material_rating)/(course.total_reviews)
+            obj.save()
+            course.save()            
+    students = CourseEnrollment.objects.filter(~Q(feedback=u''), course = course).order_by('-review_d_and_t')
     avgRating = round((course.avg_teaching_rating + course.avg_syllabus_rating + course.avg_material_rating)/3,1)
+    student_user = CourseEnrollment.objects.filter(course=course, person=person, review_d_and_t=None)
+    if student_user:
+        show_rate_btn = True
+    else:
+        show_rate_btn = False
+    rating_form = ratingsForm()
     context = {
         'course': course,
         'avgRating': avgRating,
@@ -126,5 +145,7 @@ def displayCourse(request, course_ID):
         'avgMaterialRange': range(int(course.avg_material_rating)),
         'remMaterialRange': range(5- int(course.avg_material_rating)),
         'students': students,
+        'show_rate_btn': show_rate_btn,
+        'rating_form': rating_form,
     }
     return render(request, 'courses/courseDisplay.html', context)

@@ -1,4 +1,6 @@
 var active_tab = "overview";
+const modal_container = document.getElementById("modal_container");
+const body = document.querySelector("body");
 
 function show(tab) {
     const curr_tab = document.getElementById(active_tab.concat("_tab"));
@@ -14,4 +16,14 @@ function show(tab) {
     select_tab.classList.add("tab-hghl");
     
     active_tab = tab;
+}
+
+function show_modal() {
+    modal_container.classList.add("modal_show");
+    body.style.overflow = "hidden";
+}
+
+function hide_modal() {
+    modal_container.classList.remove("modal_show");
+    body.style.overflow = "auto";
 }
