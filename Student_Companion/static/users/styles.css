@@ -205,3 +205,8 @@ table{
 .highlight-hover:hover {
     background-color: #FFFFA4;
 }
+
+.no-text-decor, .no-text-decor:hover {
+    text-decoration: none;
+    color: black;
+}

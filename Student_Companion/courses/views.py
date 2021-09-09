@@ -125,7 +125,7 @@ def displayCourse(request, course_ID):
             course.avg_material_rating += (obj.material_rating - course.avg_material_rating)/(course.total_reviews)
             obj.save()
             course.save()            
-    students = CourseEnrollment.objects.filter(~Q(feedback=u''), course = course).order_by('-review_d_and_t')
+    students = CourseEnrollment.objects.filter(feedback__gt='', course = course).order_by('-review_d_and_t')
     avgRating = round((course.avg_teaching_rating + course.avg_syllabus_rating + course.avg_material_rating)/3,1)
     student_user = CourseEnrollment.objects.filter(course=course, person=person, review_d_and_t=None)
     if student_user:
@@ -148,4 +148,5 @@ def displayCourse(request, course_ID):
         'show_rate_btn': show_rate_btn,
         'rating_form': rating_form,
     }
+
     return render(request, 'courses/courseDisplay.html', context)

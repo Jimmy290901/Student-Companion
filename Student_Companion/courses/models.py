@@ -42,6 +42,8 @@ class Course(models.Model):
     def __str__(self):
         return self.course_ID
     
+    def dispPgURL(self):
+        return reverse('displayCourse', kwargs={'course_ID': self.course_ID})
 
 class CourseEnrollment(models.Model):
     class Meta:

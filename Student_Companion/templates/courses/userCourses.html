@@ -21,8 +21,10 @@
             <div class="flex-row flex-center">
                     {% for course in fdp %}
                         <div class="info-card flex-column">
-                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                            <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                            </a>
                             <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                                 {{courseAllotment.category_allotted}}
                                 <input type="submit" value="Allot">
@@ -40,8 +42,10 @@
             <div class="flex-row flex-center">    
                 {% for course in ger %}
                     <div class="info-card flex-column">
-                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                        </a>
                         <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                             {{courseAllotment.category_allotted}}
                             <input type="submit" value="Allot">
@@ -59,8 +63,10 @@
             <div class="flex-row flex-center">    
                 {% for course in major %}
                     <div class="info-card flex-column">
-                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        </a>
                         <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                             {{courseAllotment.category_allotted}}
                             <input type="submit" value="Allot">
@@ -78,8 +84,10 @@
             <div class="flex-row flex-center">    
                 {% for course in elective %}
                     <div class="info-card flex-column">
-                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        </a>
                         <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                             {{courseAllotment.category_allotted}}
                             <input type="submit" value="Allot">
@@ -97,8 +105,10 @@
             <div class="flex-row flex-center">    
                 {% for course in complete %}
                     <div class="info-card flex-column">
-                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        </a>
                         <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                             {{courseAllotment.category_allotted}}
                             <input type="submit" value="Allot">
@@ -116,8 +126,10 @@
             <div class="flex-row flex-center">    
                 {% for course in incomplete %}
                     <div class="info-card flex-column">
-                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                            <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
+                        </a>
                     </div>
                 {% endfor %} 
             </div>
