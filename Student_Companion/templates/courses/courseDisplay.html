@@ -45,25 +45,33 @@
             <hr size="5" noshade class="unset-margin-top">
 
             <div class="flex-column wrap no-space-flex" id="overview_block">
-                <div class="content-box highlight-hover">
-                    <h4>Course Description</h4>
-                    <p>{{course.description | linebreaks}}</p>
-                </div>
+                {% if course.description %}
+                    <div class="content-box highlight-hover">
+                        <h4>Course Description</h4>
+                        <p>{{course.description | linebreaks}}</p>
+                    </div>
+                {% endif %}
 
-                <div class="content-box highlight-hover">
-                    <h4>Objectives</h4>
-                    <p>{{course.objectives | linebreaks}}</p>
-                </div>
+                {% if course.objectives %}
+                    <div class="content-box highlight-hover">
+                        <h4>Objectives</h4>
+                        <p>{{course.objectives | linebreaks}}</p>
+                    </div>
+                {% endif %}
 
-                <div class="content-box highlight-hover">
-                    <h4>Pedagogy</h4>
-                    <p>{{course.pedagogy | linebreaks }}</p>
-                </div>
+                {% if course.pedagogy %}    
+                    <div class="content-box highlight-hover">
+                        <h4>Pedagogy</h4>
+                        <p>{{course.pedagogy | linebreaks }}</p>
+                    </div>
+                {% endif %}
 
-                <div class="content-box highlight-hover">
-                    <h4>Expectation from students</h4>
-                    <p>{{course.expectation | linebreaks }}</p>
-                </div>
+                {% if course.expectation %}
+                    <div class="content-box highlight-hover">
+                        <h4>Expectation from students</h4>
+                        <p>{{course.expectation | linebreaks }}</p>
+                    </div>
+                {% endif %}
 
                 {% if course.textbook and course.refbook %}
                     <div class="content-box highlight-hover">
@@ -100,11 +108,13 @@
                     </div>
                 {% endif %}
 
-                <div class="content-box highlight-hover">
-                    <h4>Project/Assignment Details</h4>
-                    <p>{{course.project_details | linebreaks}}</p>
-                </div>
-
+                {% if course.project_details %}
+                    <div class="content-box highlight-hover">
+                        <h4>Project/Assignment Details</h4>
+                        <p>{{course.project_details | linebreaks}}</p>
+                    </div>
+                {% endif %}
+                
             </div>
 
             <div class="flex-row wrap no-display flex-center" id="instructors_block">

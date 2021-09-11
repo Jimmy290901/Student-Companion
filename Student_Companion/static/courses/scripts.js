@@ -3,12 +3,12 @@ var active_btn_name = "fdp_button";
 
 function highlight_btn(btn_name) {
     const active_btn = document.getElementById(active_btn_name);
-    active_btn.classList.remove("btn-dark");
-    active_btn.classList.add("btn-danger");
+    active_btn.classList.remove("cat-tab-select");
+    active_btn.classList.add("cat-tab-unselect");
 
     const btn = document.getElementById(btn_name);
-    btn.classList.remove("btn-danger");
-    btn.classList.add("btn-dark");
+    btn.classList.remove("cat-tab-unselect");
+    btn.classList.add("cat-tab-select");
 
     active_btn_name = btn_name;
 }

@@ -1,7 +1,24 @@
 body{
-    background-color: #ffd60a;
+    background-color: #EFDBFF;
     font-family: 'Inter', sans-serif;
 }
+
+.navbar {
+    margin-bottom: unset;
+}
+
+input[type="text"], input[type="password"], input[type="number"], input[type="email"], select{
+    min-width: 20vw;
+    height: 25px;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #D1D1D1;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="email"]:focus, select:focus {
+    border-color: #000000;
+}
+
 
 .no-display{
     display: none !important;
@@ -32,8 +49,18 @@ body{
     flex-wrap: wrap;
 }
 
+.align-start-center {
+    align-items: flex-start;
+    justify-content: center;
+}
+
 .wrap {
     flex-wrap: wrap;    
+}
+
+.cards-section {
+    flex-grow:1;
+    text-align: center;
 }
 
 .form_card{
@@ -42,7 +69,7 @@ body{
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
-    border-radius: 25px;
+    border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     padding: 20px;
@@ -54,6 +81,7 @@ body{
 
 #srchBar {
     min-width: 50%;
+    height: 50px;
     padding: 12px 20px 12px 20px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
@@ -210,3 +238,48 @@ table{
     text-decoration: none;
     color: black;
 }
+
+.ui-timepicker-div select {
+    min-width: unset;
+}
+
+.cat-tab-select {
+    background-color: #ffea00 !important;
+}
+
+.cat-tab-unselect {
+    background-color: white !important;
+}
+
+.cat-tab {
+    text-align: center;
+    border: 1px;
+    background-color: white;
+    width: 20vw;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-color: #ffea00;
+}
+
+.cat-tab:hover {
+    background-color: #EDEDED !important;
+    cursor: pointer;
+}
+
+.credits-flyer {
+    position: fixed;
+    bottom: 0;
+    right:0;
+    width: 200px;
+    background-color: #ffea00;
+    border: 1px solid #000000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media(max-width:825px) {
+    .cat-tab {
+        width: 60vw;
+    }
+}
+

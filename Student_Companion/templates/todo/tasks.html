@@ -14,12 +14,8 @@
             <center>
                 <table>
                     {% for task in tasksList %}
-                        <tr>
-                            <div id = "detail_no_show" class="no-display">
-                                {{task.id}}
-                                {{task.completed}}
-                                
-                            </div>                            
+                        
+                        <tr>                                                    
                             {% if task.completed == True %}
                                 <td><strike>{{task.task_desc}}</strike></td>
                                 <td><input type="submit" value="UnDone" onclick="window.location='{{task.changeStatus_url}}'"></td>
