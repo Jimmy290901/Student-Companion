@@ -69,3 +69,17 @@ class ratingsForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
         self.helper.add_input(Submit('submit', 'Submit'))
+
+class enrollStudentForm(forms.ModelForm):
+    class Meta:
+        model = CourseEnrollment
+        fields = ('course', 'person')
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'form_horizontal'
+        # self.helper.label_class = 'col-lg-2'
+        # self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(Submit('submit', 'Enroll'))

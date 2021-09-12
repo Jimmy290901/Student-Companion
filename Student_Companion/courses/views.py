@@ -150,3 +150,26 @@ def displayCourse(request, course_ID):
     }
 
     return render(request, 'courses/courseDisplay.html', context)
+
+@login_required(login_url='/login')
+@staff_member_required
+def enroll(request):
+    enrollForm = enrollStudentForm()
+    message = None
+    if request.method == 'POST':
+        enrollForm = enrollStudentForm(request.POST)
+        if enrollForm.is_valid():
+            obj = enrollForm.save(commit=False)
+            old_obj = CourseEnrollment.objects.filter(course = obj.course, person=obj.person)
+            if old_obj:
+                message = "Student already enrolled."
+            else:
+                obj.save()
+                message = "Student Enrollment successful."
+        else:
+            message = enrollForm.errors
+    context = {
+        'form': enrollForm,
+        'message': message,
+    }
+    return render(request, "courses/enrollStudent.html", context)

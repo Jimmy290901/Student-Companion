@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
     path('addCourse', addCourse),
     path('addFaculty',addFaculty),
+    path('enroll', enroll),
     path('myCourses', listCourses, name='listCourses'),
     path('allotCategory/<slug:course_ID>/<slug:person_ID>', allotCategory, name='allotCategory'),
     path('<slug:course_ID>', displayCourse, name="displayCourse"),
