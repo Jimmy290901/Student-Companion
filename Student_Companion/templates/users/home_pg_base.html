@@ -9,6 +9,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         {% block linkFiles %}
         {% endblock %}
         {% load static %}
@@ -21,7 +22,7 @@
     <body>
 
         <!--Navbar http://codepen.io/macsupport/pen/bKFzD-->
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        {% comment %} <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -43,18 +44,55 @@
                         {% else %}
                             <li><a href = "/">Home</a></li>
                             <li><a href = "/todo">To-Do</a></li>
-                            <li><a href = "/course/myCourses">Your Courses</a></li>                            
+                            <li><button class="dropbtn">Your Courses <i class="fa fa-caret-down"></i></button></li> 
+                            
+                            <div class="dropdown-content">
+                                <a href="/course/foundation">Foundation</a>
+                                <a href="/course/ger">GER</a>
+                                <a href="/course/major">Major Electives</a>
+                                <a href="/course/free">Free Electives</a>
+                                <a href="/course/completed">Completed</a>
+                                <a href="/course/incomplete">Incomplete</a>
+                            </div>                           
                             <li><a href = "">Resume Maker</a></li>
                         {% endif %}
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-        
+        </nav> {% endcomment %}
+        <div class="topnav" id="myTopnav">
+            {% if request.user.is_superuser %}
+                <a href = "/">Home</a>
+                <a href = "/course/addCourse">Add Courses</a>
+                <a href = "/course/addFaculty">Add Faculty</a>
+                <a href = "/course/enroll">Enroll Students</a>
+            {% else %}
+                <a href = "/">Home</a>
+                <a href = "/todo">To-Do</a>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        Your Courses
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/course/foundation">Foundation</a>
+                        <a href="/course/ger">GER</a>
+                        <a href="/course/major">Major Electives</a>
+                        <a href="/course/free">Free Electives</a>
+                        <a href="/course/completed">Completed</a>
+                        <a href="/course/incomplete">Incomplete</a>
+                    </div>
+                </div>
+                <a href = "">Resume Maker</a>
+                <a href="/logout">Logout</a>
+            {% endif %}
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
         {% block content %}
         {% endblock %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src={% static 'users/scripts.js' %}></script>
     </body>
 </html>
 
