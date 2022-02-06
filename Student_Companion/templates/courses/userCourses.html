@@ -1,182 +1,176 @@
 {% extends "users/home_pg_base.html" %}
 
 {% block content %}
+        <div class="content flex-row align-start no-wrap">
+            <div class="flex-column catgeories">
+                <h3> Catgeories </h3>
+                <div class="cat-tab top-tab" id="fdp_button" onclick="show_block('fdp')">
+                    <span>Foundation</span>
+                </div>
 
-    <div class="flex-row align-start-center">
-        <div class="flex-column" style="justify-content: space-evenly; margin-bottom: 50px;">
-            <div class="cat-tab cat-tab-select" id="fdp_button" onclick="show_block('fdp')">
-                <p>FDP</p>
+                <div class="cat-tab" id="ger_button" onclick="show_block('ger')">
+                    <span>GER</span>
+                </div>
+
+                <div class="cat-tab" id="major_button" onclick="show_block('major')">
+                    <span>Major Electives</span>
+                </div>
+
+                <div class="cat-tab" id="elective_button" onclick="show_block('elective')">
+                    <span>Free Elective</span>
+                </div>
+
+                <div class="cat-tab" id="complete_button" onclick="show_block('complete')">
+                    <span>Completed</span>
+                </div>
+
+                <div class="cat-tab bottom-tab" id="incomplete_button" onclick="show_block('incomplete')">
+                    <span>Incomplete</span>
+                </div>
             </div>
 
-            <div class="cat-tab" id="ger_button" onclick="show_block('ger')">
-                <p>GER</p>
-            </div>
-
-            <div class="cat-tab" id="major_button" onclick="show_block('major')">
-                <p>Major</p>
-            </div>
-
-            <div class="cat-tab" id="elective_button" onclick="show_block('elective')">
-                <p>Free Elective</p>
-            </div>
-
-            <div class="cat-tab" id="complete_button" onclick="show_block('complete')">
-                <p>Completed</p>
-            </div>
-
-            <div class="cat-tab" id="incomplete_button" onclick="show_block('incomplete')">
-                <p>Incomplete</p>
-            </div>
-
-            {% comment %} <button type="button" class="btn btn-dark" id="fdp_button" onclick="show_block('fdp')">FDP<br> {{fdp_credits_user}} / {{fdp_credits_limit}}</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-danger" id="ger_button" onclick="show_block('ger')">GER<br> {{ger_credits_user}} / {{ger_credits_limit}}</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-danger" id="major_button" onclick="show_block('major')">Major<br> {{major_credits_user}} / {{major_credits_limit}}</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-danger" id="elective_button" onclick="show_block('elective')">Free Electives<br> {{elective_credits_user}} / {{elective_credits_limit}}</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-danger" id="complete_button" onclick="show_block('complete')">Completed Courses</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-danger" id="incomplete_button" onclick="show_block('incomplete')">Incomplete Courses</button> {% endcomment %}
-        </div>
-
-        <div class="cards-section">
-            <div class="flex-column flex-center">
-                <input type="text" id="srchBar" onkeyup="srchCourse()" placeholder="Search Courses...">
-            </div>
-
-            <div id="fdp">
-                <div class="flex-column flex-center">
-                    <h1> Foundation Courses </h1>
-                    <div class="flex-row flex-center">
-                            {% for course in fdp %}
+            <div class="cards-section">
+                <div id="fdp">
+                    <div class="flex-column ">
+                        <h3 class="category-title"> Foundation Courses </h3>                        
+                        <input type="text" id="srchBar" placeholder="Search Courses...">                        
+                        <div class="flex-row">
+                                {% for course in fdp %}
+                                    <div class="info-card flex-column">
+                                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                            <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
+                                        </a>
+                                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                            {{courseAllotment.category_allotted}}
+                                            <input type="submit" value="Allot">
+                                        </form>
+                                    </div>
+                                {% endfor %}                
+                        </div>
+                    </div>
+                    <hr style="width: 50%; color:gray;">
+                    <div class="credits-flyer">
+                        <h4>{{fdp_credits_user}}/{{fdp_credits_limit}}</h4>
+                    </div>
+                </div>
+                
+                <div class="block_hide" id="ger">
+                    <div class="flex-column">
+                        <h3 class="category-title"> GER Courses </h3>
+                        <input type="text" id="srchBar" placeholder="Search Courses...">
+                        <div class="flex-row">    
+                            {% for course in ger %}
                                 <div class="info-card flex-column">
                                     <a href="{{course.course.dispPgURL}}" class="no-text-decor">
                                         <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                        <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
+                                        <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
                                     </a>
                                     <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
                                         {{courseAllotment.category_allotted}}
                                         <input type="submit" value="Allot">
                                     </form>
                                 </div>
-                            {% endfor %}                
+                            {% endfor %}      
+                        </div>
+                    </div>
+                    <hr style="width: 50%; color:gray;">
+                    <div class="credits-flyer">
+                        <h4>{{ger_credits_user}}/{{ger_credits_limit}}</h4>
                     </div>
                 </div>
-                <hr style="width: 50%; color:gray;">
-                <div class="credits-flyer">
-                    <h4>{{fdp_credits_user}}/{{fdp_credits_limit}}</h4>
-                </div>
-            </div>
-            
-            <div class="block_hide" id="ger">
-                <div class="flex-column flex-center">
-                    <h1> GER Courses </h1>
-                    <div class="flex-row flex-center">    
-                        {% for course in ger %}
-                            <div class="info-card flex-column">
-                                <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px; ">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>
-                                </a>
-                                <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
-                                    {{courseAllotment.category_allotted}}
-                                    <input type="submit" value="Allot">
-                                </form>
-                            </div>
-                        {% endfor %}      
-                    </div>
-                </div>
-                <hr style="width: 50%; color:gray;">
-                <div class="credits-flyer">
-                    <h4>{{ger_credits_user}}/{{ger_credits_limit}}</h4>
-                </div>
-            </div>
 
-            <div class="block_hide" id="major">
-                <div class="flex-column flex-center">
-                    <h1> Major Courses </h1>
-                    <div class="flex-row flex-center">    
-                        {% for course in major %}
-                            <div class="info-card flex-column">
-                                <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
-                                </a>
-                                <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
-                                    {{courseAllotment.category_allotted}}
-                                    <input type="submit" value="Allot">
-                                </form>
-                            </div>
-                        {% endfor %} 
+                <div class="block_hide" id="major">
+                    <div class="flex-column">
+                        <h3 class="category-title"> Major Courses </h3>
+                        <input type="text" id="srchBar" placeholder="Search Courses...">
+                        <div class="flex-row">    
+                            {% for course in major %}
+                                <div class="info-card flex-column">
+                                    <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                        <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
+                                    </a>
+                                    <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                        {{courseAllotment.category_allotted}}
+                                        <input type="submit" value="Allot">
+                                    </form>
+                                </div>
+                            {% endfor %} 
+                        </div>
+                    </div>
+                    <hr style="width: 50%; color:gray;">
+                    <div class="credits-flyer">
+                        <h4>{{major_credits_user}}/{{major_credits_limit}}</h4>
                     </div>
                 </div>
-                <hr style="width: 50%; color:gray;">
-                <div class="credits-flyer">
-                    <h4>{{major_credits_user}}/{{major_credits_limit}}</h4>
-                </div>
-            </div>
 
-            <div class="block_hide" id="elective">
-                <div class="flex-column flex-center">
-                    <h1> Free Electives Courses </h1>
-                    <div class="flex-row flex-center">    
-                        {% for course in elective %}
-                            <div class="info-card flex-column">
-                                <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
-                                </a>
-                                <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
-                                    {{courseAllotment.category_allotted}}
-                                    <input type="submit" value="Allot">
-                                </form>
-                            </div>
-                        {% endfor %} 
+                <div class="block_hide" id="elective">
+                    <div class="flex-column">
+                        <h3 class="category-title"> Free Electives Courses </h3>
+                        <input type="text" id="srchBar" placeholder="Search Courses...">
+                        <div class="flex-row">    
+                            {% for course in elective %}
+                                <div class="info-card flex-column">
+                                    <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                        <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
+                                    </a>
+                                    <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                        {{courseAllotment.category_allotted}}
+                                        <input type="submit" value="Allot">
+                                    </form>
+                                </div>
+                            {% endfor %} 
+                        </div>
+                    </div>
+                    <hr style="width: 50%; color:gray;">
+                    <div class="credits-flyer">
+                        <h4>{{elective_credits_user}}/{{elective_credits_limit}}</h4>
                     </div>
                 </div>
-                <hr style="width: 50%; color:gray;">
-                <div class="credits-flyer">
-                    <h4>{{elective_credits_user}}/{{elective_credits_limit}}</h4>
-                </div>
-            </div>
 
-            <div class="block_hide" id="complete">
-                <div class="flex-column flex-center">
-                    <h1> Completed Courses </h1>
-                    <div class="flex-row flex-center">    
-                        {% for course in complete %}
-                            <div class="info-card flex-column">
-                                <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
-                                </a>
-                                <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
-                                    {{courseAllotment.category_allotted}}
-                                    <input type="submit" value="Allot">
-                                </form>
-                            </div>
-                        {% endfor %} 
+                <div class="block_hide" id="complete">
+                    <div class="flex-column">
+                        <h3 class="category-title"> Completed Courses </h3>
+                        <input type="text" id="srchBar" placeholder="Search Courses...">
+                        <div class="flex-row">    
+                            {% for course in complete %}
+                                <div class="info-card flex-column">
+                                    <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                        <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
+                                    </a>
+                                    <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                        {{courseAllotment.category_allotted}}
+                                        <input type="submit" value="Allot">
+                                    </form>
+                                </div>
+                            {% endfor %} 
+                        </div>
                     </div>
+                    <hr style="width: 50%; color:gray;">
                 </div>
-                <hr style="width: 50%; color:gray;">
-                
-            </div>
 
-            <div class="block_hide" id="incomplete">
-                <div class="flex-column flex-center">
-                    <h1> Incomplete Courses</h1>
-                    <div class="flex-row flex-center">    
-                        {% for course in incomplete %}
-                            <div class="info-card flex-column">
-                                <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                    <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                    <h3 style="flex-grow:1; margin-left:20px; margin-right:20px;">{{course.course.course_ID}}<br>{{course.course.course_title}}</h3>                        
-                                </a>
-                            </div>
-                        {% endfor %} 
+                <div class="block_hide" id="incomplete">
+                    <div class="flex-column">
+                        <h3 class="category-title"> Incomplete Courses</h3>
+                        <input type="text" id="srchBar" placeholder="Search Courses...">
+                        <div class="flex-row">    
+                            {% for course in incomplete %}
+                                <div class="info-card flex-column">
+                                    <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                        <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                        <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>                        
+                                    </a>
+                                </div>
+                            {% endfor %} 
+                        </div>
                     </div>
+                    <hr style="width: 50%; color:gray;">
                 </div>
-                <hr style="width: 50%; color:gray;">
             </div>
         </div>
-
     {% load static %}
     <script src="{% static 'courses/scripts.js' %}"></script>
 {% endblock %}
