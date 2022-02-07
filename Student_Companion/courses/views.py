@@ -1,11 +1,13 @@
-from django.db.models.fields import NullBooleanField
-from django.http import response
+# from http.client import HTTPResponse
+# from unicodedata import category
+# from django.db.models.fields import NullBooleanField
+from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
+# from django.db.models import Q
 from users.models import Person
 from .models import *
 
@@ -40,39 +42,40 @@ def addFaculty(request):
     return render(request,'courses/facultyForm.html', context)
  
 @login_required(login_url='/login')
-def listCourses(request):
+def listCourses(request, category):
     person = get_object_or_404(Person, user = request.user)
-    fdp_courses = CourseEnrollment.objects.filter(person = person, category_allotted = "F", completed=True)
-    ger_courses = CourseEnrollment.objects.filter(person = person, category_allotted = "G", completed=True)
-    major_courses = CourseEnrollment.objects.filter(person = person, category_allotted = "M", completed=True)
-    elective_courses = CourseEnrollment.objects.filter(person = person, category_allotted = "E", completed=True)
-
-    completed_courses = CourseEnrollment.objects.filter(person = person, category_allotted = None, completed=True)
-    incompleted_courses = CourseEnrollment.objects.filter(person = person, completed=False)
-
+    if (category == "foundation"):
+        courses = CourseEnrollment.objects.filter(person = person, category_allotted = "F", completed=True)
+        credits_completed = person.fdp_credits_completed
+        credits_limit = person.major.fdp_credits
+    elif (category == "ger"):
+        course = CourseEnrollment.objects.filter(person = person, category_allotted = "G", completed=True)
+        credits_completed = person.ger_credits_completed
+        credits_limit = person.major.ger_credits
+    elif (category == "major"):
+        courses = CourseEnrollment.objects.filter(person = person, category_allotted = "M", completed=True)
+        credits_completed = person.major_credits_completed
+        credits_limit = person.major.major_credits
+    elif (category == "free"):
+        courses = CourseEnrollment.objects.filter(person = person, category_allotted = "E", completed=True)
+        credits_completed = person.freeElectives_credits_completed
+        credits_limit = person.major.freeElectives_credits
+    elif (category == "completed"):
+        courses = CourseEnrollment.objects.filter(person = person, category_allotted = None, completed=True)
+    elif (category == "incomplete"):
+        courses = CourseEnrollment.objects.filter(person = person, completed=False)
+    else:
+        return render(request, 'errors/err404.html')
     courseAllotment = courseAllotForm()
     # non_cat_courses = CourseEnrollment.objects.filter(person = person, category_allotted = NullBooleanField)
     context = {
-        'fdp': fdp_courses,
-        'ger': ger_courses,
-        'major': major_courses,
-        'elective': elective_courses,
-        
-        'fdp_credits_user': person.fdp_credits_completed,
-        'ger_credits_user': person.ger_credits_completed,
-        'major_credits_user': person.major_credits_completed,
-        'elective_credits_user': person.freeElectives_credits_completed,
-
-        'fdp_credits_limit': person.major.fdp_credits,
-        'ger_credits_limit': person.major.ger_credits,
-        'major_credits_limit': person.major.major_credits,
-        'elective_credits_limit': person.major.freeElectives_credits,
-
-        'complete': completed_courses,
-        'incomplete': incompleted_courses,
-
-        'courseAllotment': courseAllotment,
+        'courses': courses,
     }
+    if (category != "incomplete"):
+        context['courseAllotment'] = courseAllotment
+        if (category != 'complete'):
+            context['credits_completed'] = credits_completed
+            context['credits_limit'] = credits_limit
     return render(request, 'courses/userCourses.html', context)
 
 @login_required(login_url='/login')
