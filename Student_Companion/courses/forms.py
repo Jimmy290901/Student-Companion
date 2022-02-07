@@ -49,9 +49,6 @@ class courseAllotForm(forms.ModelForm):
     class Meta:
         model = CourseEnrollment
         fields = ('category_allotted',)
-        # widgets = {
-        #     'category_allotted': CharField(attrs={'value':})
-        # }
 
 class ratingsForm(forms.ModelForm):
     class Meta:

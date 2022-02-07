@@ -45,35 +45,42 @@ def addFaculty(request):
 def listCourses(request, category):
     person = get_object_or_404(Person, user = request.user)
     if (category == "foundation"):
+        title = "Foundation Courses"
         courses = CourseEnrollment.objects.filter(person = person, category_allotted = "F", completed=True)
         credits_completed = person.fdp_credits_completed
         credits_limit = person.major.fdp_credits
     elif (category == "ger"):
-        course = CourseEnrollment.objects.filter(person = person, category_allotted = "G", completed=True)
+        title = "GER Courses"
+        courses = CourseEnrollment.objects.filter(person = person, category_allotted = "G", completed=True)
         credits_completed = person.ger_credits_completed
         credits_limit = person.major.ger_credits
     elif (category == "major"):
+        title = "Major Elective Courses"
         courses = CourseEnrollment.objects.filter(person = person, category_allotted = "M", completed=True)
         credits_completed = person.major_credits_completed
         credits_limit = person.major.major_credits
     elif (category == "free"):
+        title = "Free Elective Courses"
         courses = CourseEnrollment.objects.filter(person = person, category_allotted = "E", completed=True)
         credits_completed = person.freeElectives_credits_completed
         credits_limit = person.major.freeElectives_credits
     elif (category == "completed"):
+        title = "Completed Courses"
         courses = CourseEnrollment.objects.filter(person = person, category_allotted = None, completed=True)
     elif (category == "incomplete"):
+        title = "Incomplete Courses"
         courses = CourseEnrollment.objects.filter(person = person, completed=False)
     else:
         return render(request, 'errors/err404.html')
     courseAllotment = courseAllotForm()
     # non_cat_courses = CourseEnrollment.objects.filter(person = person, category_allotted = NullBooleanField)
     context = {
+        'title': title,
         'courses': courses,
     }
     if (category != "incomplete"):
         context['courseAllotment'] = courseAllotment
-        if (category != 'complete'):
+        if (category != 'completed'):
             context['credits_completed'] = credits_completed
             context['credits_limit'] = credits_limit
     return render(request, 'courses/userCourses.html', context)
@@ -111,7 +118,7 @@ def allotCategory(request, course_ID, person_ID):
             person.freeElectives_credits_completed += course.credits
         
         person.save()
-        return redirect('listCourses')
+        return redirect(request.POST.get("next","/"))
     
 def displayCourse(request, course_ID):
     person = Person.objects.get(user=request.user)

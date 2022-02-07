@@ -1,7 +1,35 @@
 {% extends "users/home_pg_base.html" %}
 
 {% block content %}
-        <div class="content flex-row align-start no-wrap">
+        <div class="content center-flex flex-column ">
+            <h3 class="category-title"> {{title}} </h3>                        
+            <input type="text" id="srchBar" placeholder="Search Courses...">                        
+            <div class="flex-row center-flex">
+                    {% for course in courses %}
+                        <div class="info-card flex-column">
+                            <a href="{{course.course.dispPgURL}}" class="no-text-decor">
+                                <img src="../../pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
+                                <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
+                            </a>
+                            {% if title != "Incomplete Courses" %}
+                                <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
+                                    {{courseAllotment.category_allotted}}
+                                    <input type="submit" value="Allot">
+                                    <input type="hidden" name="next" value="{{request.path}}">
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endfor %}                
+            </div>
+        </div>
+        <hr style="width: 50%; color:gray;">
+        {% if title != 'Completed Courses' and title != "Incomplete Courses" %}
+            <div class="credits-flyer">
+                <h4>{{credits_completed}}/{{credits_limit}}</h4>
+            </div>
+        {% endif %}
+    
+        {% comment %} <div class="content flex-row align-start no-wrap">
             <div class="flex-column catgeories">
                 <h3> Catgeories </h3>
                 <div class="cat-tab top-tab" id="fdp_button" onclick="show_block('fdp')">
@@ -30,30 +58,7 @@
             </div>
 
             <div class="cards-section">
-                <div id="fdp">
-                    <div class="flex-column ">
-                        <h3 class="category-title"> Foundation Courses </h3>                        
-                        <input type="text" id="srchBar" placeholder="Search Courses...">                        
-                        <div class="flex-row">
-                                {% for course in fdp %}
-                                    <div class="info-card flex-column">
-                                        <a href="{{course.course.dispPgURL}}" class="no-text-decor">
-                                            <img src="pictures/{{course.course.course_photo}}" alt="Course Photo" style="flex-grow:1;" class="rect_img">
-                                            <h6 class="course-title">{{course.course.course_ID}} {{course.course.course_title}}</h6>
-                                        </a>
-                                        <form action={{course.categoryAllotURL}} method="POST"> {% csrf_token %}
-                                            {{courseAllotment.category_allotted}}
-                                            <input type="submit" value="Allot">
-                                        </form>
-                                    </div>
-                                {% endfor %}                
-                        </div>
-                    </div>
-                    <hr style="width: 50%; color:gray;">
-                    <div class="credits-flyer">
-                        <h4>{{fdp_credits_user}}/{{fdp_credits_limit}}</h4>
-                    </div>
-                </div>
+                
                 
                 <div class="block_hide" id="ger">
                     <div class="flex-column">
@@ -170,7 +175,7 @@
                     <hr style="width: 50%; color:gray;">
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
     {% load static %}
     <script src="{% static 'courses/scripts.js' %}"></script>
 {% endblock %}
