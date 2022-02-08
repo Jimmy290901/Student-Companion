@@ -66,13 +66,32 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
 .form_card{
     background-color: white;
     height: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
     padding: 20px;
+    width: 560px;
+}
+
+.signin-header {
+    text-align: center;
+}
+
+.login-ip {
+    height: 55px !important;
+    border-radius: 2px !important;
+    border: 1px solid #e6e6e6 !important;
+    margin-bottom: 36px;
+    line-height: 1.2 !important;
+    font-size: 18px !important;
+}
+
+.p-b-11 {
+    padding-bottom: 11px;
+}
+
+.p-b-32 {
+    padding-bottom: 32px;
 }
 
 .todo_form {

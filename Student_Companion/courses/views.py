@@ -1,13 +1,9 @@
-# from http.client import HTTPResponse
-# from unicodedata import category
-# from django.db.models.fields import NullBooleanField
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import PermissionDenied
-# from django.db.models import Q
 from users.models import Person
 from .models import *
 
