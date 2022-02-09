@@ -70,10 +70,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
-    width: 560px;
+    width: 480px;
 }
 
-.signin-header {
+.center-header {
     text-align: center;
 }
 
@@ -86,12 +86,35 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
     font-size: 18px !important;
 }
 
+.sign-in-btn {
+    color: #343a40;
+    background-color: transparent;
+    background-image: none !important;
+    border-color: #343a40 !important;
+    transition: background-color 0.5s, color 0.5s;
+    height: 54px;
+    font-size: larger !important;
+}
+
+.sign-in-btn:hover {
+    background-color: #343a40;
+    color: #fff !important;
+}
+
 .p-b-11 {
     padding-bottom: 11px;
 }
 
 .p-b-32 {
     padding-bottom: 32px;
+}
+
+.m-b-18 {
+    margin-bottom: 18px !important;
+}
+
+.sign-up-link {
+    text-align: center;
 }
 
 .todo_form {

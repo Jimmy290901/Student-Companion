@@ -1,60 +1,63 @@
 {% extends 'users/base.html'%}
 
-{% block form_card %}
-    <h1>Sign Up</h1>
-    <form method='POST'> {% csrf_token %}
-        <center>
-            <table class="form_table">
-                <tr>
-                    <td>Username</td>
-                    <td>{{user_form.username}}</td>
-                </tr>
-                <tr>
-                    <td>First Name</td>
-                    <td>{{user_form.first_name}}</td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{{user_form.last_name}}</td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>{{user_form.password1}}</td>
-                </tr>
-                <tr>
-                    <td>Confirm Password</td>
-                    <td>{{user_form.password2}}</td>
-                </tr>
+{% block extra_head %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Log In</title>
+{% endblock %}
 
-                <tr>
-                    <td>Gender</td>
-                    <td>{{person_form.gender}}</td>
-                </tr>
-                <tr>
-                    <td>Contact Number</td>
-                    <td>{{person_form.phone_number}}</td>
-                </tr>
-                <tr>
-                    <td>College Email ID</td>
-                    <td>{{person_form.college_mail}}</td>
-                </tr>
-                <tr>
-                    <td>Major</td>
-                    <td>{{person_form.major}}</td>
-                </tr>
-                <tr>
-                    <td>Enrollment Year</td>
-                    <td>{{person_form.enr_year}}</td>
-                </tr>
-            </table>
-            <input type="submit" value="Create an account"> 
-        </center>
+{% block form_card %}
+    <h1 class="center-header">Sign Up</h1>
+    <form method="POST"> {% csrf_token %}
+        <div class="form-group">
+            <label for="username" class="p-b-11">USERNAME</label>
+            {{user_form.username}}
+        </div>
+        <div class="form-group">
+            <label for="first_name" class="p-b-11">FIRST NAME</label>
+            {{user_form.first_name}}
+        </div>
+        <div class="form-group">
+            <label for="last_name" class="p-b-11">LAST NAME</label>
+            {{user_form.last_name}}
+        </div>
+        <div class="form-group">
+            <label for="password" class="p-b-11">PASSWORD</label>
+            {{user_form.password1}}
+        </div>
+        <div class="form-group">
+            <label for="password" class="p-b-11">CONFIRM YOUR PASSWORD</label>
+            {{user_form.password2}}
+        </div>
+        <div class="form-group">
+            <label for="username" class="p-b-11">GENDER</label>
+            {{person_form.gender}}
+        </div>
+        <div class="form-group">
+            <label for="username" class="p-b-11">CONTACT NO.</label>
+            {{person_form.phone_number}}
+        </div>
+        <div class="form-group">
+            <label for="username" class="p-b-11">COLLEGE EMAIL ID</label>
+            {{person_form.college_mail}}
+        </div>
+        <div class="form-group">
+            <label for="username" class="p-b-11">MAJOR</label>
+            {{person_form.major}}
+        </div>
+        <div class="form-group">
+            <label for="username" class="p-b-11">ENROLLMENT YEAR</label>
+            {{person_form.enr_year}}
+        </div>
+        <button type="submit" class="btn btn-block sign-in-btn m-b-18">Create a New Account</button>
     </form>
-    <h3>Back to <a href="/login">Login</a></h3>
-    {% comment %} {{user_form.as_p}}
-    {{person_form.as_p}} {% endcomment %}
-    <div class="alert alert-danger">
-        {{user_error}}
-        {{person_error}}
-    </div>
+    <p class="sign-up-link">Back to <a href='/login'>Log In</a></p>
+
+    <!--Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 {% endblock %}

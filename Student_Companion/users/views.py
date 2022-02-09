@@ -48,6 +48,7 @@ def signup(request):
         'user_error':user.errors,
         'person_error':person.errors,
     }
+    print(user.errors, person.errors)
     return render(request,'users/signup.html', context)
 
 def logout(request):

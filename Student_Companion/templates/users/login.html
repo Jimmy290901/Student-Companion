@@ -9,26 +9,22 @@
 {% endblock %}
 
 {% block form_card %}
-    
-    <h1 class="p-b-32 signin-header">Sign In</h1>
-    <form method="POST">
-        <div class="form-group">
-          <label for="enrollment_id" class="p-b-11">Enrollment ID</label>
-          <input type="text" class="form-control login-ip" id="enrollment_id" placeholder="Enrollment ID">
-        </div>
-        <div class="form-group">
-          <label for="password" class="p-b-11">Password</label>
-          <input type="password" class="form-control login-ip" id="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <h1 class="p-b-32 center-header">Sign In</h1>
+        <form method="POST"> {% csrf_token %}
+            <div class="form-group">
+            <label for="username" class="p-b-11">USERNAME</label>
+            <input type="text" class="form-control login-ip" id="username" name="username" placeholder="Enrollment ID">
+            </div>
+            <div class="form-group">
+            <label for="password" class="p-b-11">PASSWORD</label>
+            <input type="password" class="form-control login-ip" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-block sign-in-btn m-b-18">Log In</button>
+        </form>
+        <p class="sign-up-link">Don't have an account? <a href='/signup'>Sign Up</a> now!</p>
 
     <!--Jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {% comment %} <!--Popper JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    {% comment %} {% load static %}
-    <script src={% static 'users/login.js' %}></script>  {% endcomment %}
 {% endblock %}
