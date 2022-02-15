@@ -10,46 +10,63 @@
 
 {% block form_card %}
     <h1 class="center-header">Sign Up</h1>
-    <form method="POST"> {% csrf_token %}
-        <div class="form-group">
-            <label for="username" class="p-b-11">USERNAME</label>
-            {{user_form.username}}
+    <form method="POST" class="signup-form"> {% csrf_token %}
+        
+        <div class="flex-row justify-sb">
+            <div class="form-group m-eb-10 ele-1">
+                <label for="username" class="m-b-8">USERNAME</label>
+                {{user_form.username}}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="first_name" class="p-b-11">FIRST NAME</label>
-            {{user_form.first_name}}
+
+        <div class="flex-row justify-sb">            
+            <div class="form-group m-eb-10">
+                <label for="password" class="m-b-8">PASSWORD</label>
+                {{user_form.password1}}
+            </div>
+            <div class="form-group m-eb-10">
+                <label for="password" class="m-b-8">CONFIRM PASSWORD</label>
+                {{user_form.password2}}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="last_name" class="p-b-11">LAST NAME</label>
-            {{user_form.last_name}}
+
+        <div class="flex-row justify-sb">
+            <div class="form-group m-eb-10">
+                <label for="first_name" class="m-b-8">FIRST NAME</label>
+                {{user_form.first_name}}
+            </div>            
+            <div class="form-group m-eb-10">
+                <label for="last_name" class="m-b-8">LAST NAME</label>
+                {{user_form.last_name}}
+            </div>                        
         </div>
-        <div class="form-group">
-            <label for="password" class="p-b-11">PASSWORD</label>
-            {{user_form.password1}}
+        
+        <div class="flex-row justify-sb">            
+            <div class="form-group m-eb-10 ele-1">
+                <label for="username" class="m-b-8">COLLEGE EMAIL ID</label>
+                {{person_form.college_mail}}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password" class="p-b-11">CONFIRM YOUR PASSWORD</label>
-            {{user_form.password2}}
+        
+        <div class="flex-row justify-sb">
+            <div class="form-group m-eb-10">
+                <label for="username" class="m-b-8">GENDER</label>
+                {{person_form.gender}}
+            </div>
+            <div class="form-group m-eb-10">
+                <label for="username" class="m-b-8">CONTACT NO.</label>
+                {{person_form.phone_number}}
+            </div>            
         </div>
-        <div class="form-group">
-            <label for="username" class="p-b-11">GENDER</label>
-            {{person_form.gender}}
-        </div>
-        <div class="form-group">
-            <label for="username" class="p-b-11">CONTACT NO.</label>
-            {{person_form.phone_number}}
-        </div>
-        <div class="form-group">
-            <label for="username" class="p-b-11">COLLEGE EMAIL ID</label>
-            {{person_form.college_mail}}
-        </div>
-        <div class="form-group">
-            <label for="username" class="p-b-11">MAJOR</label>
-            {{person_form.major}}
-        </div>
-        <div class="form-group">
-            <label for="username" class="p-b-11">ENROLLMENT YEAR</label>
-            {{person_form.enr_year}}
+        <div class="flex-row justify-sb">
+            <div class="form-group m-eb-10">
+                <label for="username" class="m-b-8">MAJOR</label>
+                {{person_form.major}}
+            </div>
+            <div class="form-group m-eb-10">
+                <label for="username" class="m-b-8">ENROLLMENT YEAR</label>
+                {{person_form.enr_year}}
+            </div>
         </div>
         <button type="submit" class="btn btn-block sign-in-btn m-b-18">Create a New Account</button>
     </form>

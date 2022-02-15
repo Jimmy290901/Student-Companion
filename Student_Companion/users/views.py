@@ -21,7 +21,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/')
         else:
-            message = 'Check Username or Password'
+            message = 'Invalid Credentials. Try again.'
     context = {
         'message': message
     }

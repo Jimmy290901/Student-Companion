@@ -53,6 +53,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
     align-items: flex-start;
     /* justify-content: center; */
 }
+.justify-sb {
+    justify-content: space-between;
+}
 
 .wrap {
     flex-wrap: wrap;    
@@ -73,17 +76,51 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
     width: 480px;
 }
 
+.form-group {
+    margin-bottom: 16px !important;
+}
+
+.m-eb-10 {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .center-header {
     text-align: center;
 }
 
+.signup-form .form-group {
+    width: 100%;
+}
+
+.signup-form .flex-row {
+    flex-wrap: nowrap !important;
+}
+
+.signup-form input, .signup-form select {
+    /* max-width: 20rem !important; */
+    min-width: 0 !important;
+    width: 100%;
+}
+
+.ele-1 {
+    width: 100%;
+}
+
+.ele-1 input {
+    width: 100%;
+    max-width: unset !important;
+}
+
 .login-ip {
-    height: 55px !important;
+    height: 40px !important;
     border-radius: 2px !important;
     border: 1px solid #e6e6e6 !important;
-    margin-bottom: 36px;
+    /* margin-bottom: 36px; */
     line-height: 1.2 !important;
-    font-size: 18px !important;
+    font-size: 14px !important;
+    padding: 8px !important;
 }
 
 .sign-in-btn {
@@ -92,7 +129,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
     background-image: none !important;
     border-color: #343a40 !important;
     transition: background-color 0.5s, color 0.5s;
-    height: 54px;
+    height: 40px;
     font-size: larger !important;
 }
 
@@ -107,6 +144,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:foc
 
 .p-b-32 {
     padding-bottom: 32px;
+}
+
+.m-b-8 {
+    margin-bottom: 8px;
 }
 
 .m-b-18 {
@@ -478,4 +519,10 @@ table{
         display:none;
     }
 } */
+
+@media (max-width:420px) {
+    .signup-form .flex-row {
+        flex-wrap: wrap !important;
+    }
+}
 

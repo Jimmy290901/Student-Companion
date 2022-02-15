@@ -10,6 +10,11 @@
 
 {% block form_card %}
         <h1 class="p-b-32 center-header">Sign In</h1>
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                <center>{{message}}</center>
+            </div>
+        {% endif %}
         <form method="POST"> {% csrf_token %}
             <div class="form-group">
             <label for="username" class="p-b-11">USERNAME</label>
