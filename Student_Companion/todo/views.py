@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
 from .models import *
@@ -17,10 +18,12 @@ def listTasks(request):
             created_task.person = person
             created_task.save()
             print('Task created successfully.')
+            return redirect('/todo')
     tasksList = Tasks.objects.filter(person=person).order_by('-d_and_t')
     context = {
         'form':newTask,
         'tasksList': tasksList,
+        'curr_date': datetime.now(),
     }
     return render(request, 'todo/tasks.html', context)
 

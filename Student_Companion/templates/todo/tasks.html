@@ -4,56 +4,63 @@
 {% block content %}
 
     <div class="flex-container">
-        <div class="form_card flex-column">
-            <h1>To-Do</h1>
-            <form class = "todo_form" method = "POST"> {% csrf_token %}
+        <div class="form_card flex-column no-padding relative">
+            <div class="flex-row justify-sb padding10px">
+                <div class="date">
+                    <h3>{{curr_date | date:"l, jS"}}</h3>
+                    <h4>{{curr_date | date:"F"}}</h4>
+                </div>
+                <h4 class="total-tasks">{{tasksList|length}} tasks</h4>
+            </div>
+            {% comment %} <hr class="thin-grey"> {% endcomment %}
+            <i class="fa fa-plus-circle"></i>
+            <form class="todo_form" method = "POST"> {% csrf_token %}
                 {{form.task_desc}} <br><br>
                 {{form.rem_d_and_t}} <br><br>
-                <input type="submit" value="ToDo">
-            </form>
-            <center>
-                <table>
-                    {% for task in tasksList %}
-                        
-                        <tr>                                                    
-                            {% if task.completed == True %}
-                                <td><strike>{{task.task_desc}}</strike></td>
-                                <td><input type="submit" value="UnDone" onclick="window.location='{{task.changeStatus_url}}'"></td>
-                            {% else %}
-                                <td>{{task.task_desc}}</td>
-                                <td><input type="submit" value="Done" onclick="window.location='{{task.changeStatus_url}}'"></td>
-                            {% endif %}
-                            {% comment %} <td>{{task.rem_d_and_t | date:"Y-m-d H:i" }}</td> {% endcomment %}
-                            <td><button class="update_task" onclick="fillUpdateDetails('{{task.task_desc}}', '{{task.update_url}}', '{{task.completed}}', '{{task.rem_d_and_t | date:"Y-m-d H:i"}}')">Update</button></td>
-                            {% comment %} <td><a href={{task.update_url}}>Update</a></td> {% endcomment %}
-                            <td><input type="submit" value="Delete" onclick="window.location='{{task.delete_url}}'"></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </center>
+                <button class="btn btn-block sign-in-btn" type="submit">ToDo</button>
+            </form>            
+            {% for task in tasksList %}   
+                <hr class="thin-grey">
+                <div class="flex-row no-wrap padding10px hover-blue-border">                
+                    {% if task.completed == True %}
+                        <input type="checkbox" class="margin10px" onclick="window.location='{{task.changeStatus_url}}'" checked>                    
+                    {% else %}                                
+                        <input type="checkbox" class="margin10px" onclick="window.location='{{task.changeStatus_url}}'">                    
+                    {% endif %}
+                    <div class="flex-row justify-sb no-wrap flex-grow">
+                        {% if task.completed == True %}
+                            <span class="task-title" onclick="fillUpdateDetails('{{task.task_desc}}', '{{task.update_url}}', '{{task.completed}}', '{{task.rem_d_and_t | date:"Y-m-d H:i"}}')"><strike>{{task.task_desc}}</strike></span>
+                        {% else %}
+                            <span class="task-title" onclick="fillUpdateDetails('{{task.task_desc}}', '{{task.update_url}}', '{{task.completed}}', '{{task.rem_d_and_t | date:"Y-m-d H:i"}}')">{{task.task_desc}}</span>
+                        {% endif %}
+                        <i class="fa fa-trash" onclick="window.location='{{task.delete_url}}'"></i>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
     <!--Modal for task updations -->
     <div id = "modal_container" class="flex-container">
         <div class="box_modal">
-            <form method = "POST" action="#"> {% csrf_token %}
+            <form class="update-form" method = "POST" action="#"> {% csrf_token %}
                 {{form.task_desc}} <br><br>
                 {{form.rem_d_and_t}} <br><br>
                 <label>Completed</label>
-                {{form.completed}} <br><br>
-                {% comment %} <input type="submit" id="update_button" value="Update"> <br><br> {% endcomment %}
-                <input type="submit" value="Update"> <br><br>
-            </form>
-            <button id="close_modal">Cancel</button>
+                {{form.completed}} <br><br>                               
+            </form>      
+            <div class="float-right">      
+                <button class="btn cancel" id="close_modal">Cancel</button>
+                <button class="btn submit-update-form">Update</button>                
+            </div>
         </div>
     </div>
-
-    {% load static %}
+    
     <!-- Date Time Picker JS -->
+    {% comment %} {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'date-time-phone/jquery-ui.js' %}" ></script>
-    <script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script> 
+    <script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script>  {% endcomment %}
     {% comment %} <script>
         $( function() {
             $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
@@ -61,14 +68,13 @@
             // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
         });
     </script> {% endcomment %}
-    <script>
+    {% comment %} <script>
         $( function() {
             $( "#id_rem_d_and_t" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             $( "#update_rem_id" ).datetimepicker({ dateFormat: 'yy-mm-dd', minDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).timepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
             // $( "#id_rem_d_and_t" ).datepicker({ dateFormat: 'yy-mm-dd' }).attr("autocomplete", "off") ;
         });
-    </script>
-    <script src="{% static 'users/scripts.js' %}"></script>
-  <!-- Date Time Picker JS -->
+    </script> {% endcomment %}
+    <!-- Date Time Picker JS -->
 {% endblock%}
