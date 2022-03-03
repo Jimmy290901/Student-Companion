@@ -27,3 +27,8 @@ function hide_modal() {
     modal_container.classList.remove("modal_show");
     body.style.overflow = "auto";
 }
+
+function submit_ratings() {
+    const form = document.getElementById("ratings_form");
+    form.submit();
+}

@@ -173,7 +173,7 @@
 
                     {% if show_rate_btn %}
                         <div class="content-box">
-                            <button type="button" class="btn btn-primary baseline-item" onclick="show_modal()">Rate Course</button>
+                            <button type="button" class="btn rate-course" onclick="show_modal()">Rate Course</button>
                         </div>
                     {% endif %}
 
@@ -213,7 +213,10 @@
     <div id="modal_container" class="flex-container">
         <div class="box_modal">
             {% crispy rating_form %}
-            <button type="button" class="btn btn-outline-secondary" onclick="hide_modal()">Cancel</button>
+            <div class="float-right">
+                <button type="button" class="btn cancel" onclick="hide_modal()">Cancel</button>
+                <button class="btn submit-rating" type="submit" onclick="submit_ratings()">Submit</button>
+            </div>
         </div>
     </div>
 

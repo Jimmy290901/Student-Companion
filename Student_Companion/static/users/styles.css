@@ -536,16 +536,24 @@ hr {
     margin: 0;
   }
 
-  .submit-update-form {
+  .submit-update-form, .rate-course, .submit-rating {
       background-color: transparent;
       background-image: none !important;
       border-color: green !important;
       transition: background-color 0.5s, color 0.5s;
   }
 
-  .submit-update-form:hover {
+  .submit-update-form:hover, .rate-course:hover, .submit-rating:hover {
       background-color: green;
       color: white;
+  }
+
+  .unset-width {
+      width: unset !important;
+  }
+
+  .full-width {
+      width: 100% !important;
   }
 
   .cancel {
